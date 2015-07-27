@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_bootstrap" default="compile.module.bootstrap">
+  <dirname property="module.bootstrap.basedir" file="${ant.file.module_bootstrap}"/>
+  
+  <property name="module.jdk.home.bootstrap" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.bootstrap" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.bootstrap" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.bootstrap" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
+  
+  <property name="bootstrap.output.dir" value="${module.bootstrap.basedir}/../out/production/bootstrap"/>
+  <property name="bootstrap.testoutput.dir" value="${module.bootstrap.basedir}/../out/test/bootstrap"/>
+  
+  <path id="bootstrap.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="bootstrap.module.production.classpath">
+    <path refid="${module.jdk.classpath.bootstrap}"/>
+    <pathelement location="${basedir}/repository/commons/log4j-1.2.16.jar"/>
+    <pathelement location="${commons.output.dir}"/>
+    <pathelement location="${basedir}/repository/jpa/hibernate-jpa-2.0-api-1.0.0.Final.jar"/>
+    <fileset dir="${basedir}/repository/google/google-gson-2.2.4">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <pathelement location="${sctp-api.output.dir}"/>
+    <pathelement location="${m3ua-api.output.dir}"/>
+    <pathelement location="${m3ua-impl.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <pathelement location="${sccp-impl.output.dir}"/>
+    <pathelement location="${sccp-api.output.dir}"/>
+    <pathelement location="${map-impl.output.dir}"/>
+    <pathelement location="${map-api.output.dir}"/>
+    <pathelement location="${tcap-api.output.dir}"/>
+    <pathelement location="${tcap-impl.output.dir}"/>
+    <pathelement location="${sctp-impl.output.dir}"/>
+    <pathelement location="${mtp-impl.output.dir}"/>
+    <pathelement location="${mtp-api.output.dir}"/>
+  </path>
+  
+  <path id="bootstrap.runtime.production.module.classpath">
+    <pathelement location="${bootstrap.output.dir}"/>
+    <pathelement location="${basedir}/repository/commons/log4j-1.2.16.jar"/>
+    <path refid="commons.runtime.production.module.classpath"/>
+    <pathelement location="${basedir}/repository/jpa/hibernate-jpa-2.0-api-1.0.0.Final.jar"/>
+    <fileset dir="${basedir}/repository/google/google-gson-2.2.4">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <path refid="sctp-api.runtime.production.module.classpath"/>
+    <path refid="m3ua-api.runtime.production.module.classpath"/>
+    <path refid="m3ua-impl.runtime.production.module.classpath"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <path refid="sccp-impl.runtime.production.module.classpath"/>
+    <path refid="sccp-api.runtime.production.module.classpath"/>
+    <path refid="map-impl.runtime.production.module.classpath"/>
+    <path refid="map-api.runtime.production.module.classpath"/>
+    <path refid="tcap-api.runtime.production.module.classpath"/>
+    <path refid="tcap-impl.runtime.production.module.classpath"/>
+    <path refid="sctp-impl.runtime.production.module.classpath"/>
+    <path refid="mtp-impl.runtime.production.module.classpath"/>
+    <path refid="mtp-api.runtime.production.module.classpath"/>
+  </path>
+  
+  <path id="bootstrap.module.classpath">
+    <path refid="${module.jdk.classpath.bootstrap}"/>
+    <pathelement location="${bootstrap.output.dir}"/>
+    <pathelement location="${basedir}/repository/commons/log4j-1.2.16.jar"/>
+    <pathelement location="${commons.testoutput.dir}"/>
+    <pathelement location="${commons.output.dir}"/>
+    <pathelement location="${basedir}/repository/jpa/hibernate-jpa-2.0-api-1.0.0.Final.jar"/>
+    <fileset dir="${basedir}/repository/google/google-gson-2.2.4">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <pathelement location="${sctp-api.testoutput.dir}"/>
+    <pathelement location="${sctp-api.output.dir}"/>
+    <pathelement location="${m3ua-api.testoutput.dir}"/>
+    <pathelement location="${m3ua-api.output.dir}"/>
+    <pathelement location="${m3ua-impl.testoutput.dir}"/>
+    <pathelement location="${m3ua-impl.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <pathelement location="${sccp-impl.testoutput.dir}"/>
+    <pathelement location="${sccp-impl.output.dir}"/>
+    <pathelement location="${sccp-api.testoutput.dir}"/>
+    <pathelement location="${sccp-api.output.dir}"/>
+    <pathelement location="${map-impl.testoutput.dir}"/>
+    <pathelement location="${map-impl.output.dir}"/>
+    <pathelement location="${map-api.testoutput.dir}"/>
+    <pathelement location="${map-api.output.dir}"/>
+    <pathelement location="${tcap-api.testoutput.dir}"/>
+    <pathelement location="${tcap-api.output.dir}"/>
+    <pathelement location="${tcap-impl.testoutput.dir}"/>
+    <pathelement location="${tcap-impl.output.dir}"/>
+    <pathelement location="${sctp-impl.testoutput.dir}"/>
+    <pathelement location="${sctp-impl.output.dir}"/>
+    <pathelement location="${mtp-impl.testoutput.dir}"/>
+    <pathelement location="${mtp-impl.output.dir}"/>
+    <pathelement location="${mtp-api.testoutput.dir}"/>
+    <pathelement location="${mtp-api.output.dir}"/>
+  </path>
+  
+  <path id="bootstrap.runtime.module.classpath">
+    <pathelement location="${bootstrap.testoutput.dir}"/>
+    <pathelement location="${bootstrap.output.dir}"/>
+    <pathelement location="${basedir}/repository/commons/log4j-1.2.16.jar"/>
+    <path refid="commons.runtime.module.classpath"/>
+    <pathelement location="${basedir}/repository/jpa/hibernate-jpa-2.0-api-1.0.0.Final.jar"/>
+    <fileset dir="${basedir}/repository/google/google-gson-2.2.4">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <path refid="sctp-api.runtime.module.classpath"/>
+    <path refid="m3ua-api.runtime.module.classpath"/>
+    <path refid="m3ua-impl.runtime.module.classpath"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <path refid="sccp-impl.runtime.module.classpath"/>
+    <path refid="sccp-api.runtime.module.classpath"/>
+    <path refid="map-impl.runtime.module.classpath"/>
+    <path refid="map-api.runtime.module.classpath"/>
+    <path refid="tcap-api.runtime.module.classpath"/>
+    <path refid="tcap-impl.runtime.module.classpath"/>
+    <path refid="sctp-impl.runtime.module.classpath"/>
+    <path refid="mtp-impl.runtime.module.classpath"/>
+    <path refid="mtp-api.runtime.module.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.bootstrap">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.bootstrap">
+    <patternset refid="excluded.from.module.bootstrap"/>
+  </patternset>
+  
+  <path id="bootstrap.module.sourcepath">
+    <dirset dir="${module.bootstrap.basedir}">
+      <include name="src/java/main"/>
+    </dirset>
+  </path>
+  
+  <path id="bootstrap.module.test.sourcepath">
+    <dirset dir="${module.bootstrap.basedir}">
+      <include name="src/java/test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.bootstrap" depends="compile.module.bootstrap.production,compile.module.bootstrap.tests" description="Compile module bootstrap"/>
+  
+  <target name="compile.module.bootstrap.production" depends="register.custom.compilers,compile.module.commons,compile.module.sctp-api,compile.module.m3ua-api,compile.module.m3ua-impl,compile.module.sccp-impl,compile.module.sccp-api,compile.module.map-impl,compile.module.map-api,compile.module.tcap-api,compile.module.tcap-impl,compile.module.sctp-impl,compile.module.mtp-impl,compile.module.mtp-api" description="Compile module bootstrap; production classes">
+    <mkdir dir="${bootstrap.output.dir}"/>
+    <javac2 destdir="${bootstrap.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.bootstrap}/javac">
+      <compilerarg line="${compiler.args.bootstrap}"/>
+      <bootclasspath refid="bootstrap.module.bootclasspath"/>
+      <classpath refid="bootstrap.module.production.classpath"/>
+      <src refid="bootstrap.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.bootstrap"/>
+    </javac2>
+    
+    <copy todir="${bootstrap.output.dir}">
+      <fileset dir="${module.bootstrap.basedir}/src/java/main">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.bootstrap.tests" depends="register.custom.compilers,compile.module.bootstrap.production" description="compile module bootstrap; test classes" unless="skip.tests">
+    <mkdir dir="${bootstrap.testoutput.dir}"/>
+    <javac2 destdir="${bootstrap.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.bootstrap}/javac">
+      <compilerarg line="${compiler.args.bootstrap}"/>
+      <bootclasspath refid="bootstrap.module.bootclasspath"/>
+      <classpath refid="bootstrap.module.classpath"/>
+      <src refid="bootstrap.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.bootstrap"/>
+    </javac2>
+    
+    <copy todir="${bootstrap.testoutput.dir}">
+      <fileset dir="${module.bootstrap.basedir}/src/java/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.bootstrap" description="cleanup module">
+    <delete dir="${bootstrap.output.dir}"/>
+    <delete dir="${bootstrap.testoutput.dir}"/>
+  </target>
+</project>

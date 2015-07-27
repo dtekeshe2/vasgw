@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_map-api" default="compile.module.map-api">
+  <dirname property="module.map-api.basedir" file="${ant.file.module_map-api}"/>
+  
+  <property name="module.jdk.home.map-api" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.map-api" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.map-api" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.map-api" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
+  
+  <property name="map-api.output.dir" value="${module.map-api.basedir}/../../out/production/map-api"/>
+  <property name="map-api.testoutput.dir" value="${module.map-api.basedir}/../../out/test/map-api"/>
+  
+  <path id="map-api.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="map-api.module.production.classpath">
+    <path refid="${module.jdk.classpath.map-api}"/>
+    <pathelement location="${basedir}/repository/commons/commons-logging-1.0.4.jar"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <pathelement location="${tcap-api.output.dir}"/>
+    <pathelement location="${asn-impl.output.dir}"/>
+    <pathelement location="${isup-api.output.dir}"/>
+    <pathelement location="${sccp-api.output.dir}"/>
+  </path>
+  
+  <path id="map-api.runtime.production.module.classpath">
+    <pathelement location="${map-api.output.dir}"/>
+    <pathelement location="${basedir}/repository/commons/commons-logging-1.0.4.jar"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <path refid="tcap-api.runtime.production.module.classpath"/>
+    <path refid="asn-impl.runtime.production.module.classpath"/>
+    <path refid="isup-api.runtime.production.module.classpath"/>
+    <path refid="sccp-api.runtime.production.module.classpath"/>
+  </path>
+  
+  <path id="map-api.module.classpath">
+    <path refid="${module.jdk.classpath.map-api}"/>
+    <pathelement location="${map-api.output.dir}"/>
+    <pathelement location="${basedir}/repository/commons/commons-logging-1.0.4.jar"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <pathelement location="${tcap-api.testoutput.dir}"/>
+    <pathelement location="${tcap-api.output.dir}"/>
+    <pathelement location="${asn-impl.testoutput.dir}"/>
+    <pathelement location="${asn-impl.output.dir}"/>
+    <pathelement location="${isup-api.testoutput.dir}"/>
+    <pathelement location="${isup-api.output.dir}"/>
+    <pathelement location="${sccp-api.testoutput.dir}"/>
+    <pathelement location="${sccp-api.output.dir}"/>
+  </path>
+  
+  <path id="map-api.runtime.module.classpath">
+    <pathelement location="${map-api.testoutput.dir}"/>
+    <pathelement location="${map-api.output.dir}"/>
+    <pathelement location="${basedir}/repository/commons/commons-logging-1.0.4.jar"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <path refid="tcap-api.runtime.module.classpath"/>
+    <path refid="asn-impl.runtime.module.classpath"/>
+    <path refid="isup-api.runtime.module.classpath"/>
+    <path refid="sccp-api.runtime.module.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.map-api">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.map-api">
+    <patternset refid="excluded.from.module.map-api"/>
+  </patternset>
+  
+  <path id="map-api.module.sourcepath">
+    <dirset dir="${module.map-api.basedir}">
+      <include name="src/java/main"/>
+    </dirset>
+  </path>
+  
+  <path id="map-api.module.test.sourcepath">
+    <dirset dir="${module.map-api.basedir}">
+      <include name="src/java/test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.map-api" depends="compile.module.map-api.production,compile.module.map-api.tests" description="Compile module map-api"/>
+  
+  <target name="compile.module.map-api.production" depends="register.custom.compilers,compile.module.tcap-api,compile.module.asn-impl,compile.module.isup-api,compile.module.sccp-api" description="Compile module map-api; production classes">
+    <mkdir dir="${map-api.output.dir}"/>
+    <javac2 destdir="${map-api.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.map-api}/javac">
+      <compilerarg line="${compiler.args.map-api}"/>
+      <bootclasspath refid="map-api.module.bootclasspath"/>
+      <classpath refid="map-api.module.production.classpath"/>
+      <src refid="map-api.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.map-api"/>
+    </javac2>
+    
+    <copy todir="${map-api.output.dir}">
+      <fileset dir="${module.map-api.basedir}/src/java/main">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.map-api.tests" depends="register.custom.compilers,compile.module.map-api.production" description="compile module map-api; test classes" unless="skip.tests">
+    <mkdir dir="${map-api.testoutput.dir}"/>
+    <javac2 destdir="${map-api.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.map-api}/javac">
+      <compilerarg line="${compiler.args.map-api}"/>
+      <bootclasspath refid="map-api.module.bootclasspath"/>
+      <classpath refid="map-api.module.classpath"/>
+      <src refid="map-api.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.map-api"/>
+    </javac2>
+    
+    <copy todir="${map-api.testoutput.dir}">
+      <fileset dir="${module.map-api.basedir}/src/java/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.map-api" description="cleanup module">
+    <delete dir="${map-api.output.dir}"/>
+    <delete dir="${map-api.testoutput.dir}"/>
+  </target>
+</project>

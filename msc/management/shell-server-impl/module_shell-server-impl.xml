@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_shell-server-impl" default="compile.module.shell-server-impl">
+  <dirname property="module.shell-server-impl.basedir" file="${ant.file.module_shell-server-impl}"/>
+  
+  <property name="module.jdk.home.shell-server-impl" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.shell-server-impl" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.shell-server-impl" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.shell-server-impl" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
+  
+  <property name="shell-server-impl.output.dir" value="${module.shell-server-impl.basedir}/../../out/production/shell-server-impl"/>
+  <property name="shell-server-impl.testoutput.dir" value="${module.shell-server-impl.basedir}/../../out/test/shell-server-impl"/>
+  
+  <path id="shell-server-impl.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="shell-server-impl.module.production.classpath">
+    <path refid="${module.jdk.classpath.shell-server-impl}"/>
+  </path>
+  
+  <path id="shell-server-impl.runtime.production.module.classpath">
+    <pathelement location="${shell-server-impl.output.dir}"/>
+  </path>
+  
+  <path id="shell-server-impl.module.classpath">
+    <path refid="${module.jdk.classpath.shell-server-impl}"/>
+    <pathelement location="${shell-server-impl.output.dir}"/>
+  </path>
+  
+  <path id="shell-server-impl.runtime.module.classpath">
+    <pathelement location="${shell-server-impl.testoutput.dir}"/>
+    <pathelement location="${shell-server-impl.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.shell-server-impl">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.shell-server-impl">
+    <patternset refid="excluded.from.module.shell-server-impl"/>
+  </patternset>
+  
+  <path id="shell-server-impl.module.sourcepath">
+    <dirset dir="${module.shell-server-impl.basedir}">
+      <include name="src/java/main"/>
+    </dirset>
+  </path>
+  
+  <path id="shell-server-impl.module.test.sourcepath">
+    <dirset dir="${module.shell-server-impl.basedir}">
+      <include name="src/java/test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.shell-server-impl" depends="compile.module.shell-server-impl.production,compile.module.shell-server-impl.tests" description="Compile module shell-server-impl"/>
+  
+  <target name="compile.module.shell-server-impl.production" depends="register.custom.compilers" description="Compile module shell-server-impl; production classes">
+    <mkdir dir="${shell-server-impl.output.dir}"/>
+    <javac2 destdir="${shell-server-impl.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.shell-server-impl}/javac">
+      <compilerarg line="${compiler.args.shell-server-impl}"/>
+      <bootclasspath refid="shell-server-impl.module.bootclasspath"/>
+      <classpath refid="shell-server-impl.module.production.classpath"/>
+      <src refid="shell-server-impl.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.shell-server-impl"/>
+    </javac2>
+    
+    <copy todir="${shell-server-impl.output.dir}">
+      <fileset dir="${module.shell-server-impl.basedir}/src/java/main">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.shell-server-impl.tests" depends="register.custom.compilers,compile.module.shell-server-impl.production" description="compile module shell-server-impl; test classes" unless="skip.tests">
+    <mkdir dir="${shell-server-impl.testoutput.dir}"/>
+    <javac2 destdir="${shell-server-impl.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.shell-server-impl}/javac">
+      <compilerarg line="${compiler.args.shell-server-impl}"/>
+      <bootclasspath refid="shell-server-impl.module.bootclasspath"/>
+      <classpath refid="shell-server-impl.module.classpath"/>
+      <src refid="shell-server-impl.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.shell-server-impl"/>
+    </javac2>
+    
+    <copy todir="${shell-server-impl.testoutput.dir}">
+      <fileset dir="${module.shell-server-impl.basedir}/src/java/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.shell-server-impl" description="cleanup module">
+    <delete dir="${shell-server-impl.output.dir}"/>
+    <delete dir="${shell-server-impl.testoutput.dir}"/>
+  </target>
+</project>

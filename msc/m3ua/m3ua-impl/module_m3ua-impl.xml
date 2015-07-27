@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_m3ua-impl" default="compile.module.m3ua-impl">
+  <dirname property="module.m3ua-impl.basedir" file="${ant.file.module_m3ua-impl}"/>
+  
+  <property name="module.jdk.home.m3ua-impl" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.m3ua-impl" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.m3ua-impl" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.m3ua-impl" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
+  
+  <property name="m3ua-impl.output.dir" value="${module.m3ua-impl.basedir}/../../out/production/m3ua-impl"/>
+  <property name="m3ua-impl.testoutput.dir" value="${module.m3ua-impl.basedir}/../../out/test/m3ua-impl"/>
+  
+  <path id="m3ua-impl.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="m3ua-impl.module.production.classpath">
+    <path refid="${module.jdk.classpath.m3ua-impl}"/>
+    <pathelement location="${basedir}/repository/commons/javolution-core-java-6.0.1-20130819.063134-2.jar"/>
+    <pathelement location="${basedir}/repository/commons/log4j-1.2.16.jar"/>
+    <pathelement location="${m3ua-api.output.dir}"/>
+    <pathelement location="${mtp-impl.output.dir}"/>
+    <pathelement location="${commons.output.dir}"/>
+    <pathelement location="${sctp-api.output.dir}"/>
+    <pathelement location="${mtp-api.output.dir}"/>
+    <pathelement location="${map-api.output.dir}"/>
+    <pathelement location="${map-impl.output.dir}"/>
+    <pathelement location="${asn-impl.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <pathelement location="${shell-server-api.output.dir}"/>
+    <path refid="library.rt.classpath"/>
+  </path>
+  
+  <path id="m3ua-impl.runtime.production.module.classpath">
+    <pathelement location="${m3ua-impl.output.dir}"/>
+    <pathelement location="${basedir}/repository/commons/javolution-core-java-6.0.1-20130819.063134-2.jar"/>
+    <pathelement location="${basedir}/repository/commons/log4j-1.2.16.jar"/>
+    <path refid="m3ua-api.runtime.production.module.classpath"/>
+    <path refid="mtp-impl.runtime.production.module.classpath"/>
+    <path refid="commons.runtime.production.module.classpath"/>
+    <path refid="sctp-api.runtime.production.module.classpath"/>
+    <path refid="mtp-api.runtime.production.module.classpath"/>
+    <path refid="map-api.runtime.production.module.classpath"/>
+    <path refid="map-impl.runtime.production.module.classpath"/>
+    <path refid="asn-impl.runtime.production.module.classpath"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <path refid="shell-server-api.runtime.production.module.classpath"/>
+    <path refid="library.rt.classpath"/>
+  </path>
+  
+  <path id="m3ua-impl.module.classpath">
+    <path refid="${module.jdk.classpath.m3ua-impl}"/>
+    <pathelement location="${m3ua-impl.output.dir}"/>
+    <pathelement location="${basedir}/repository/commons/javolution-core-java-6.0.1-20130819.063134-2.jar"/>
+    <pathelement location="${basedir}/repository/commons/log4j-1.2.16.jar"/>
+    <pathelement location="${m3ua-api.testoutput.dir}"/>
+    <pathelement location="${m3ua-api.output.dir}"/>
+    <pathelement location="${mtp-impl.testoutput.dir}"/>
+    <pathelement location="${mtp-impl.output.dir}"/>
+    <pathelement location="${commons.testoutput.dir}"/>
+    <pathelement location="${commons.output.dir}"/>
+    <pathelement location="${sctp-api.testoutput.dir}"/>
+    <pathelement location="${sctp-api.output.dir}"/>
+    <pathelement location="${mtp-api.testoutput.dir}"/>
+    <pathelement location="${mtp-api.output.dir}"/>
+    <pathelement location="${map-api.testoutput.dir}"/>
+    <pathelement location="${map-api.output.dir}"/>
+    <pathelement location="${map-impl.testoutput.dir}"/>
+    <pathelement location="${map-impl.output.dir}"/>
+    <pathelement location="${asn-impl.testoutput.dir}"/>
+    <pathelement location="${asn-impl.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <pathelement location="${shell-server-api.testoutput.dir}"/>
+    <pathelement location="${shell-server-api.output.dir}"/>
+    <pathelement location="${basedir}/repository/testng-5.5.jar"/>
+    <pathelement location="${basedir}/repository/testng-5.0.jar"/>
+    <path refid="library.rt.classpath"/>
+    <pathelement location="${sctp-impl.testoutput.dir}"/>
+    <pathelement location="${sctp-impl.output.dir}"/>
+  </path>
+  
+  <path id="m3ua-impl.runtime.module.classpath">
+    <pathelement location="${m3ua-impl.testoutput.dir}"/>
+    <pathelement location="${m3ua-impl.output.dir}"/>
+    <pathelement location="${basedir}/repository/commons/javolution-core-java-6.0.1-20130819.063134-2.jar"/>
+    <pathelement location="${basedir}/repository/commons/log4j-1.2.16.jar"/>
+    <path refid="m3ua-api.runtime.module.classpath"/>
+    <path refid="mtp-impl.runtime.module.classpath"/>
+    <path refid="commons.runtime.module.classpath"/>
+    <path refid="sctp-api.runtime.module.classpath"/>
+    <path refid="mtp-api.runtime.module.classpath"/>
+    <path refid="map-api.runtime.module.classpath"/>
+    <path refid="map-impl.runtime.module.classpath"/>
+    <path refid="asn-impl.runtime.module.classpath"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <path refid="shell-server-api.runtime.module.classpath"/>
+    <pathelement location="${basedir}/repository/testng-5.5.jar"/>
+    <pathelement location="${basedir}/repository/testng-5.0.jar"/>
+    <path refid="library.rt.classpath"/>
+    <path refid="sctp-impl.runtime.module.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.m3ua-impl">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.m3ua-impl">
+    <patternset refid="excluded.from.module.m3ua-impl"/>
+  </patternset>
+  
+  <path id="m3ua-impl.module.sourcepath">
+    <dirset dir="${module.m3ua-impl.basedir}">
+      <include name="src/java/main"/>
+    </dirset>
+  </path>
+  
+  <path id="m3ua-impl.module.test.sourcepath">
+    <dirset dir="${module.m3ua-impl.basedir}">
+      <include name="src/java/test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.m3ua-impl" depends="compile.module.m3ua-impl.production,compile.module.m3ua-impl.tests" description="Compile module m3ua-impl"/>
+  
+  <target name="compile.module.m3ua-impl.production" depends="register.custom.compilers,compile.module.m3ua-api,compile.module.mtp-impl,compile.module.commons,compile.module.sctp-api,compile.module.mtp-api,compile.module.map-api,compile.module.map-impl,compile.module.asn-impl,compile.module.shell-server-api,compile.module.sctp-impl" description="Compile module m3ua-impl; production classes">
+    <mkdir dir="${m3ua-impl.output.dir}"/>
+    <javac2 destdir="${m3ua-impl.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.m3ua-impl}/javac">
+      <compilerarg line="${compiler.args.m3ua-impl}"/>
+      <bootclasspath refid="m3ua-impl.module.bootclasspath"/>
+      <classpath refid="m3ua-impl.module.production.classpath"/>
+      <src refid="m3ua-impl.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.m3ua-impl"/>
+    </javac2>
+    
+    <copy todir="${m3ua-impl.output.dir}">
+      <fileset dir="${module.m3ua-impl.basedir}/src/java/main">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.m3ua-impl.tests" depends="register.custom.compilers,compile.module.m3ua-impl.production" description="compile module m3ua-impl; test classes" unless="skip.tests">
+    <mkdir dir="${m3ua-impl.testoutput.dir}"/>
+    <javac2 destdir="${m3ua-impl.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.m3ua-impl}/javac">
+      <compilerarg line="${compiler.args.m3ua-impl}"/>
+      <bootclasspath refid="m3ua-impl.module.bootclasspath"/>
+      <classpath refid="m3ua-impl.module.classpath"/>
+      <src refid="m3ua-impl.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.m3ua-impl"/>
+    </javac2>
+    
+    <copy todir="${m3ua-impl.testoutput.dir}">
+      <fileset dir="${module.m3ua-impl.basedir}/src/java/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.m3ua-impl" description="cleanup module">
+    <delete dir="${m3ua-impl.output.dir}"/>
+    <delete dir="${m3ua-impl.testoutput.dir}"/>
+  </target>
+</project>

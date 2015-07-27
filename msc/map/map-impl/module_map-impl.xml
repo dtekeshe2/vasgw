@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_map-impl" default="compile.module.map-impl">
+  <dirname property="module.map-impl.basedir" file="${ant.file.module_map-impl}"/>
+  
+  <property name="module.jdk.home.map-impl" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.map-impl" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.map-impl" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.map-impl" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
+  
+  <property name="map-impl.output.dir" value="${module.map-impl.basedir}/../../out/production/map-impl"/>
+  <property name="map-impl.testoutput.dir" value="${module.map-impl.basedir}/../../out/test/map-impl"/>
+  
+  <path id="map-impl.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="map-impl.module.production.classpath">
+    <path refid="${module.jdk.classpath.map-impl}"/>
+    <pathelement location="${map-api.output.dir}"/>
+    <pathelement location="${basedir}/repository/commons/log4j-1.2.16.jar"/>
+    <pathelement location="${asn-impl.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <pathelement location="${sccp-api.output.dir}"/>
+    <pathelement location="${tcap-api.output.dir}"/>
+    <pathelement location="${tcap-impl.output.dir}"/>
+    <pathelement location="${congestion.output.dir}"/>
+    <pathelement location="${isup-api.output.dir}"/>
+    <pathelement location="${isup-impl.output.dir}"/>
+  </path>
+  
+  <path id="map-impl.runtime.production.module.classpath">
+    <pathelement location="${map-impl.output.dir}"/>
+    <path refid="map-api.runtime.production.module.classpath"/>
+    <pathelement location="${basedir}/repository/commons/log4j-1.2.16.jar"/>
+    <path refid="asn-impl.runtime.production.module.classpath"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <path refid="sccp-api.runtime.production.module.classpath"/>
+    <path refid="tcap-api.runtime.production.module.classpath"/>
+    <path refid="tcap-impl.runtime.production.module.classpath"/>
+    <path refid="congestion.runtime.production.module.classpath"/>
+    <path refid="isup-api.runtime.production.module.classpath"/>
+    <path refid="isup-impl.runtime.production.module.classpath"/>
+  </path>
+  
+  <path id="map-impl.module.classpath">
+    <path refid="${module.jdk.classpath.map-impl}"/>
+    <pathelement location="${map-impl.output.dir}"/>
+    <pathelement location="${map-api.testoutput.dir}"/>
+    <pathelement location="${map-api.output.dir}"/>
+    <pathelement location="${basedir}/repository/commons/log4j-1.2.16.jar"/>
+    <pathelement location="${asn-impl.testoutput.dir}"/>
+    <pathelement location="${asn-impl.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <pathelement location="${sccp-api.testoutput.dir}"/>
+    <pathelement location="${sccp-api.output.dir}"/>
+    <pathelement location="${tcap-api.testoutput.dir}"/>
+    <pathelement location="${tcap-api.output.dir}"/>
+    <pathelement location="${tcap-impl.testoutput.dir}"/>
+    <pathelement location="${tcap-impl.output.dir}"/>
+    <pathelement location="${congestion.testoutput.dir}"/>
+    <pathelement location="${congestion.output.dir}"/>
+    <pathelement location="${isup-api.testoutput.dir}"/>
+    <pathelement location="${isup-api.output.dir}"/>
+    <pathelement location="${isup-impl.testoutput.dir}"/>
+    <pathelement location="${isup-impl.output.dir}"/>
+  </path>
+  
+  <path id="map-impl.runtime.module.classpath">
+    <pathelement location="${map-impl.testoutput.dir}"/>
+    <pathelement location="${map-impl.output.dir}"/>
+    <path refid="map-api.runtime.module.classpath"/>
+    <pathelement location="${basedir}/repository/commons/log4j-1.2.16.jar"/>
+    <path refid="asn-impl.runtime.module.classpath"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <path refid="sccp-api.runtime.module.classpath"/>
+    <path refid="tcap-api.runtime.module.classpath"/>
+    <path refid="tcap-impl.runtime.module.classpath"/>
+    <path refid="congestion.runtime.module.classpath"/>
+    <path refid="isup-api.runtime.module.classpath"/>
+    <path refid="isup-impl.runtime.module.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.map-impl">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.map-impl">
+    <patternset refid="excluded.from.module.map-impl"/>
+  </patternset>
+  
+  <path id="map-impl.module.sourcepath">
+    <dirset dir="${module.map-impl.basedir}">
+      <include name="src/java/main"/>
+    </dirset>
+  </path>
+  
+  <path id="map-impl.module.test.sourcepath">
+    <dirset dir="${module.map-impl.basedir}">
+      <include name="src/java/test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.map-impl" depends="compile.module.map-impl.production,compile.module.map-impl.tests" description="Compile module map-impl"/>
+  
+  <target name="compile.module.map-impl.production" depends="register.custom.compilers,compile.module.map-api,compile.module.asn-impl,compile.module.sccp-api,compile.module.tcap-api,compile.module.tcap-impl,compile.module.congestion,compile.module.isup-api,compile.module.isup-impl" description="Compile module map-impl; production classes">
+    <mkdir dir="${map-impl.output.dir}"/>
+    <javac2 destdir="${map-impl.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.map-impl}/javac">
+      <compilerarg line="${compiler.args.map-impl}"/>
+      <bootclasspath refid="map-impl.module.bootclasspath"/>
+      <classpath refid="map-impl.module.production.classpath"/>
+      <src refid="map-impl.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.map-impl"/>
+    </javac2>
+    
+    <copy todir="${map-impl.output.dir}">
+      <fileset dir="${module.map-impl.basedir}/src/java/main">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.map-impl.tests" depends="register.custom.compilers,compile.module.map-impl.production" description="compile module map-impl; test classes" unless="skip.tests">
+    <mkdir dir="${map-impl.testoutput.dir}"/>
+    <javac2 destdir="${map-impl.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.map-impl}/javac">
+      <compilerarg line="${compiler.args.map-impl}"/>
+      <bootclasspath refid="map-impl.module.bootclasspath"/>
+      <classpath refid="map-impl.module.classpath"/>
+      <src refid="map-impl.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.map-impl"/>
+    </javac2>
+    
+    <copy todir="${map-impl.testoutput.dir}">
+      <fileset dir="${module.map-impl.basedir}/src/java/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.map-impl" description="cleanup module">
+    <delete dir="${map-impl.output.dir}"/>
+    <delete dir="${map-impl.testoutput.dir}"/>
+  </target>
+</project>

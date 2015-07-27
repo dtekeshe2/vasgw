@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_m3ua-api" default="compile.module.m3ua-api">
+  <dirname property="module.m3ua-api.basedir" file="${ant.file.module_m3ua-api}"/>
+  
+  <property name="module.jdk.home.m3ua-api" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.m3ua-api" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.m3ua-api" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.m3ua-api" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
+  
+  <property name="m3ua-api.output.dir" value="${module.m3ua-api.basedir}/../../out/production/m3ua-api"/>
+  <property name="m3ua-api.testoutput.dir" value="${module.m3ua-api.basedir}/../../out/test/m3ua-api"/>
+  
+  <path id="m3ua-api.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="m3ua-api.module.production.classpath">
+    <path refid="${module.jdk.classpath.m3ua-api}"/>
+    <pathelement location="${sctp-api.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  <path id="m3ua-api.runtime.production.module.classpath">
+    <pathelement location="${m3ua-api.output.dir}"/>
+    <path refid="sctp-api.runtime.production.module.classpath"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  <path id="m3ua-api.module.classpath">
+    <path refid="${module.jdk.classpath.m3ua-api}"/>
+    <pathelement location="${m3ua-api.output.dir}"/>
+    <pathelement location="${sctp-api.testoutput.dir}"/>
+    <pathelement location="${sctp-api.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  <path id="m3ua-api.runtime.module.classpath">
+    <pathelement location="${m3ua-api.testoutput.dir}"/>
+    <pathelement location="${m3ua-api.output.dir}"/>
+    <path refid="sctp-api.runtime.module.classpath"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.m3ua-api">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.m3ua-api">
+    <patternset refid="excluded.from.module.m3ua-api"/>
+  </patternset>
+  
+  <path id="m3ua-api.module.sourcepath">
+    <dirset dir="${module.m3ua-api.basedir}">
+      <include name="src/java/main"/>
+    </dirset>
+  </path>
+  
+  <path id="m3ua-api.module.test.sourcepath">
+    <dirset dir="${module.m3ua-api.basedir}">
+      <include name="src/java/test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.m3ua-api" depends="compile.module.m3ua-api.production,compile.module.m3ua-api.tests" description="Compile module m3ua-api"/>
+  
+  <target name="compile.module.m3ua-api.production" depends="register.custom.compilers,compile.module.sctp-api" description="Compile module m3ua-api; production classes">
+    <mkdir dir="${m3ua-api.output.dir}"/>
+    <javac2 destdir="${m3ua-api.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.m3ua-api}/javac">
+      <compilerarg line="${compiler.args.m3ua-api}"/>
+      <bootclasspath refid="m3ua-api.module.bootclasspath"/>
+      <classpath refid="m3ua-api.module.production.classpath"/>
+      <src refid="m3ua-api.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.m3ua-api"/>
+    </javac2>
+    
+    <copy todir="${m3ua-api.output.dir}">
+      <fileset dir="${module.m3ua-api.basedir}/src/java/main">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.m3ua-api.tests" depends="register.custom.compilers,compile.module.m3ua-api.production" description="compile module m3ua-api; test classes" unless="skip.tests">
+    <mkdir dir="${m3ua-api.testoutput.dir}"/>
+    <javac2 destdir="${m3ua-api.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.m3ua-api}/javac">
+      <compilerarg line="${compiler.args.m3ua-api}"/>
+      <bootclasspath refid="m3ua-api.module.bootclasspath"/>
+      <classpath refid="m3ua-api.module.classpath"/>
+      <src refid="m3ua-api.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.m3ua-api"/>
+    </javac2>
+    
+    <copy todir="${m3ua-api.testoutput.dir}">
+      <fileset dir="${module.m3ua-api.basedir}/src/java/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.m3ua-api" description="cleanup module">
+    <delete dir="${m3ua-api.output.dir}"/>
+    <delete dir="${m3ua-api.testoutput.dir}"/>
+  </target>
+</project>

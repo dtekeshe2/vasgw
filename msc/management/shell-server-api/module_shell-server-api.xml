@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_shell-server-api" default="compile.module.shell-server-api">
+  <dirname property="module.shell-server-api.basedir" file="${ant.file.module_shell-server-api}"/>
+  
+  <property name="module.jdk.home.shell-server-api" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.shell-server-api" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.shell-server-api" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.shell-server-api" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
+  
+  <property name="shell-server-api.output.dir" value="${module.shell-server-api.basedir}/../../out/production/shell-server-api"/>
+  <property name="shell-server-api.testoutput.dir" value="${module.shell-server-api.basedir}/../../out/test/shell-server-api"/>
+  
+  <path id="shell-server-api.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="shell-server-api.module.production.classpath">
+    <path refid="${module.jdk.classpath.shell-server-api}"/>
+  </path>
+  
+  <path id="shell-server-api.runtime.production.module.classpath">
+    <pathelement location="${shell-server-api.output.dir}"/>
+  </path>
+  
+  <path id="shell-server-api.module.classpath">
+    <path refid="${module.jdk.classpath.shell-server-api}"/>
+    <pathelement location="${shell-server-api.output.dir}"/>
+  </path>
+  
+  <path id="shell-server-api.runtime.module.classpath">
+    <pathelement location="${shell-server-api.testoutput.dir}"/>
+    <pathelement location="${shell-server-api.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.shell-server-api">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.shell-server-api">
+    <patternset refid="excluded.from.module.shell-server-api"/>
+  </patternset>
+  
+  <path id="shell-server-api.module.sourcepath">
+    <dirset dir="${module.shell-server-api.basedir}">
+      <include name="src/java/main"/>
+    </dirset>
+  </path>
+  
+  <path id="shell-server-api.module.test.sourcepath">
+    <dirset dir="${module.shell-server-api.basedir}">
+      <include name="src/java/test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.shell-server-api" depends="compile.module.shell-server-api.production,compile.module.shell-server-api.tests" description="Compile module shell-server-api"/>
+  
+  <target name="compile.module.shell-server-api.production" depends="register.custom.compilers" description="Compile module shell-server-api; production classes">
+    <mkdir dir="${shell-server-api.output.dir}"/>
+    <javac2 destdir="${shell-server-api.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.shell-server-api}/javac">
+      <compilerarg line="${compiler.args.shell-server-api}"/>
+      <bootclasspath refid="shell-server-api.module.bootclasspath"/>
+      <classpath refid="shell-server-api.module.production.classpath"/>
+      <src refid="shell-server-api.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.shell-server-api"/>
+    </javac2>
+    
+    <copy todir="${shell-server-api.output.dir}">
+      <fileset dir="${module.shell-server-api.basedir}/src/java/main">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.shell-server-api.tests" depends="register.custom.compilers,compile.module.shell-server-api.production" description="compile module shell-server-api; test classes" unless="skip.tests">
+    <mkdir dir="${shell-server-api.testoutput.dir}"/>
+    <javac2 destdir="${shell-server-api.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.shell-server-api}/javac">
+      <compilerarg line="${compiler.args.shell-server-api}"/>
+      <bootclasspath refid="shell-server-api.module.bootclasspath"/>
+      <classpath refid="shell-server-api.module.classpath"/>
+      <src refid="shell-server-api.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.shell-server-api"/>
+    </javac2>
+    
+    <copy todir="${shell-server-api.testoutput.dir}">
+      <fileset dir="${module.shell-server-api.basedir}/src/java/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.shell-server-api" description="cleanup module">
+    <delete dir="${shell-server-api.output.dir}"/>
+    <delete dir="${shell-server-api.testoutput.dir}"/>
+  </target>
+</project>

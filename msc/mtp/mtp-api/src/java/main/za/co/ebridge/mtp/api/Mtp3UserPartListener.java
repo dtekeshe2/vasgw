@@ -1,0 +1,12 @@
+package za.co.ebridge.mtp.api;
+
+public interface Mtp3UserPartListener
+{
+    void onMtp3TransferMessage(Mtp3TransferPrimitive msg);
+
+    void onMtp3PauseMessage(Mtp3PausePrimitive msg);
+
+    void onMtp3ResumeMessage(Mtp3ResumePrimitive msg);
+
+    void onMtp3StatusMessage(Mtp3StatusPrimitive msg);
+}

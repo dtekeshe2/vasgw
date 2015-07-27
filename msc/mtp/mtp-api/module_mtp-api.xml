@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_mtp-api" default="compile.module.mtp-api">
+  <dirname property="module.mtp-api.basedir" file="${ant.file.module_mtp-api}"/>
+  
+  <property name="module.jdk.home.mtp-api" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.mtp-api" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.mtp-api" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.mtp-api" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
+  
+  <property name="mtp-api.output.dir" value="${module.mtp-api.basedir}/../../out/production/mtp-api"/>
+  <property name="mtp-api.testoutput.dir" value="${module.mtp-api.basedir}/../../out/test/mtp-api"/>
+  
+  <path id="mtp-api.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="mtp-api.module.production.classpath">
+    <path refid="${module.jdk.classpath.mtp-api}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  <path id="mtp-api.runtime.production.module.classpath">
+    <pathelement location="${mtp-api.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  <path id="mtp-api.module.classpath">
+    <path refid="${module.jdk.classpath.mtp-api}"/>
+    <pathelement location="${mtp-api.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  <path id="mtp-api.runtime.module.classpath">
+    <pathelement location="${mtp-api.testoutput.dir}"/>
+    <pathelement location="${mtp-api.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.mtp-api">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.mtp-api">
+    <patternset refid="excluded.from.module.mtp-api"/>
+  </patternset>
+  
+  <path id="mtp-api.module.sourcepath">
+    <dirset dir="${module.mtp-api.basedir}">
+      <include name="src/java/main"/>
+    </dirset>
+  </path>
+  
+  <path id="mtp-api.module.test.sourcepath">
+    <dirset dir="${module.mtp-api.basedir}">
+      <include name="src/java/test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.mtp-api" depends="compile.module.mtp-api.production,compile.module.mtp-api.tests" description="Compile module mtp-api"/>
+  
+  <target name="compile.module.mtp-api.production" depends="register.custom.compilers" description="Compile module mtp-api; production classes">
+    <mkdir dir="${mtp-api.output.dir}"/>
+    <javac2 destdir="${mtp-api.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.mtp-api}/javac">
+      <compilerarg line="${compiler.args.mtp-api}"/>
+      <bootclasspath refid="mtp-api.module.bootclasspath"/>
+      <classpath refid="mtp-api.module.production.classpath"/>
+      <src refid="mtp-api.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.mtp-api"/>
+    </javac2>
+    
+    <copy todir="${mtp-api.output.dir}">
+      <fileset dir="${module.mtp-api.basedir}/src/java/main">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.mtp-api.tests" depends="register.custom.compilers,compile.module.mtp-api.production" description="compile module mtp-api; test classes" unless="skip.tests">
+    <mkdir dir="${mtp-api.testoutput.dir}"/>
+    <javac2 destdir="${mtp-api.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.mtp-api}/javac">
+      <compilerarg line="${compiler.args.mtp-api}"/>
+      <bootclasspath refid="mtp-api.module.bootclasspath"/>
+      <classpath refid="mtp-api.module.classpath"/>
+      <src refid="mtp-api.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.mtp-api"/>
+    </javac2>
+    
+    <copy todir="${mtp-api.testoutput.dir}">
+      <fileset dir="${module.mtp-api.basedir}/src/java/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.mtp-api" description="cleanup module">
+    <delete dir="${mtp-api.output.dir}"/>
+    <delete dir="${mtp-api.testoutput.dir}"/>
+  </target>
+</project>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_sccp-api" default="compile.module.sccp-api">
+  <dirname property="module.sccp-api.basedir" file="${ant.file.module_sccp-api}"/>
+  
+  <property name="module.jdk.home.sccp-api" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.sccp-api" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.sccp-api" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.sccp-api" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
+  
+  <property name="sccp-api.output.dir" value="${module.sccp-api.basedir}/../../out/production/sccp-api"/>
+  <property name="sccp-api.testoutput.dir" value="${module.sccp-api.basedir}/../../out/test/sccp-api"/>
+  
+  <path id="sccp-api.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="sccp-api.module.production.classpath">
+    <path refid="${module.jdk.classpath.sccp-api}"/>
+    <pathelement location="${mtp-api.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  <path id="sccp-api.runtime.production.module.classpath">
+    <pathelement location="${sccp-api.output.dir}"/>
+    <path refid="mtp-api.runtime.production.module.classpath"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  <path id="sccp-api.module.classpath">
+    <path refid="${module.jdk.classpath.sccp-api}"/>
+    <pathelement location="${sccp-api.output.dir}"/>
+    <pathelement location="${mtp-api.testoutput.dir}"/>
+    <pathelement location="${mtp-api.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  <path id="sccp-api.runtime.module.classpath">
+    <pathelement location="${sccp-api.testoutput.dir}"/>
+    <pathelement location="${sccp-api.output.dir}"/>
+    <path refid="mtp-api.runtime.module.classpath"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.sccp-api">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.sccp-api">
+    <patternset refid="excluded.from.module.sccp-api"/>
+  </patternset>
+  
+  <path id="sccp-api.module.sourcepath">
+    <dirset dir="${module.sccp-api.basedir}">
+      <include name="src/java/main"/>
+    </dirset>
+  </path>
+  
+  <path id="sccp-api.module.test.sourcepath">
+    <dirset dir="${module.sccp-api.basedir}">
+      <include name="src/java/test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.sccp-api" depends="compile.module.sccp-api.production,compile.module.sccp-api.tests" description="Compile module sccp-api"/>
+  
+  <target name="compile.module.sccp-api.production" depends="register.custom.compilers,compile.module.mtp-api" description="Compile module sccp-api; production classes">
+    <mkdir dir="${sccp-api.output.dir}"/>
+    <javac2 destdir="${sccp-api.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.sccp-api}/javac">
+      <compilerarg line="${compiler.args.sccp-api}"/>
+      <bootclasspath refid="sccp-api.module.bootclasspath"/>
+      <classpath refid="sccp-api.module.production.classpath"/>
+      <src refid="sccp-api.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.sccp-api"/>
+    </javac2>
+    
+    <copy todir="${sccp-api.output.dir}">
+      <fileset dir="${module.sccp-api.basedir}/src/java/main">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.sccp-api.tests" depends="register.custom.compilers,compile.module.sccp-api.production" description="compile module sccp-api; test classes" unless="skip.tests">
+    <mkdir dir="${sccp-api.testoutput.dir}"/>
+    <javac2 destdir="${sccp-api.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.sccp-api}/javac">
+      <compilerarg line="${compiler.args.sccp-api}"/>
+      <bootclasspath refid="sccp-api.module.bootclasspath"/>
+      <classpath refid="sccp-api.module.classpath"/>
+      <src refid="sccp-api.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.sccp-api"/>
+    </javac2>
+    
+    <copy todir="${sccp-api.testoutput.dir}">
+      <fileset dir="${module.sccp-api.basedir}/src/java/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.sccp-api" description="cleanup module">
+    <delete dir="${sccp-api.output.dir}"/>
+    <delete dir="${sccp-api.testoutput.dir}"/>
+  </target>
+</project>

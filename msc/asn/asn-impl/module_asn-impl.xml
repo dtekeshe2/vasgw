@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_asn-impl" default="compile.module.asn-impl">
+  <dirname property="module.asn-impl.basedir" file="${ant.file.module_asn-impl}"/>
+  
+  <property name="module.jdk.home.asn-impl" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.asn-impl" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.asn-impl" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.asn-impl" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
+  
+  <property name="asn-impl.output.dir" value="${module.asn-impl.basedir}/../../out/production/asn-impl"/>
+  <property name="asn-impl.testoutput.dir" value="${module.asn-impl.basedir}/../../out/test/asn-impl"/>
+  
+  <path id="asn-impl.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="asn-impl.module.production.classpath">
+    <path refid="${module.jdk.classpath.asn-impl}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  <path id="asn-impl.runtime.production.module.classpath">
+    <pathelement location="${asn-impl.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  <path id="asn-impl.module.classpath">
+    <path refid="${module.jdk.classpath.asn-impl}"/>
+    <pathelement location="${asn-impl.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  <path id="asn-impl.runtime.module.classpath">
+    <pathelement location="${asn-impl.testoutput.dir}"/>
+    <pathelement location="${asn-impl.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.asn-impl">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.asn-impl">
+    <patternset refid="excluded.from.module.asn-impl"/>
+  </patternset>
+  
+  <path id="asn-impl.module.sourcepath">
+    <dirset dir="${module.asn-impl.basedir}">
+      <include name="src/java/main"/>
+    </dirset>
+  </path>
+  
+  <path id="asn-impl.module.test.sourcepath">
+    <dirset dir="${module.asn-impl.basedir}">
+      <include name="src/java/test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.asn-impl" depends="compile.module.asn-impl.production,compile.module.asn-impl.tests" description="Compile module asn-impl"/>
+  
+  <target name="compile.module.asn-impl.production" depends="register.custom.compilers" description="Compile module asn-impl; production classes">
+    <mkdir dir="${asn-impl.output.dir}"/>
+    <javac2 destdir="${asn-impl.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.asn-impl}/javac">
+      <compilerarg line="${compiler.args.asn-impl}"/>
+      <bootclasspath refid="asn-impl.module.bootclasspath"/>
+      <classpath refid="asn-impl.module.production.classpath"/>
+      <src refid="asn-impl.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.asn-impl"/>
+    </javac2>
+    
+    <copy todir="${asn-impl.output.dir}">
+      <fileset dir="${module.asn-impl.basedir}/src/java/main">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.asn-impl.tests" depends="register.custom.compilers,compile.module.asn-impl.production" description="compile module asn-impl; test classes" unless="skip.tests">
+    <mkdir dir="${asn-impl.testoutput.dir}"/>
+    <javac2 destdir="${asn-impl.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.asn-impl}/javac">
+      <compilerarg line="${compiler.args.asn-impl}"/>
+      <bootclasspath refid="asn-impl.module.bootclasspath"/>
+      <classpath refid="asn-impl.module.classpath"/>
+      <src refid="asn-impl.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.asn-impl"/>
+    </javac2>
+    
+    <copy todir="${asn-impl.testoutput.dir}">
+      <fileset dir="${module.asn-impl.basedir}/src/java/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.asn-impl" description="cleanup module">
+    <delete dir="${asn-impl.output.dir}"/>
+    <delete dir="${asn-impl.testoutput.dir}"/>
+  </target>
+</project>

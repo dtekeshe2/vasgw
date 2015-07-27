@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_sctp-impl" default="compile.module.sctp-impl">
+  <dirname property="module.sctp-impl.basedir" file="${ant.file.module_sctp-impl}"/>
+  
+  <property name="module.jdk.home.sctp-impl" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.sctp-impl" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.sctp-impl" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.sctp-impl" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
+  
+  <property name="sctp-impl.output.dir" value="${module.sctp-impl.basedir}/../../out/production/sctp-impl"/>
+  <property name="sctp-impl.testoutput.dir" value="${module.sctp-impl.basedir}/../../out/test/sctp-impl"/>
+  
+  <path id="sctp-impl.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="sctp-impl.module.production.classpath">
+    <path refid="${module.jdk.classpath.sctp-impl}"/>
+    <pathelement location="${sctp-api.output.dir}"/>
+    <pathelement location="${basedir}/repository/commons/log4j-1.2.16.jar"/>
+    <path refid="library.rt.classpath"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+  </path>
+  
+  <path id="sctp-impl.runtime.production.module.classpath">
+    <pathelement location="${sctp-impl.output.dir}"/>
+    <path refid="sctp-api.runtime.production.module.classpath"/>
+    <pathelement location="${basedir}/repository/commons/log4j-1.2.16.jar"/>
+    <path refid="library.rt.classpath"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+  </path>
+  
+  <path id="sctp-impl.module.classpath">
+    <path refid="${module.jdk.classpath.sctp-impl}"/>
+    <pathelement location="${sctp-impl.output.dir}"/>
+    <pathelement location="${sctp-api.testoutput.dir}"/>
+    <pathelement location="${sctp-api.output.dir}"/>
+    <pathelement location="${basedir}/repository/commons/log4j-1.2.16.jar"/>
+    <path refid="library.rt.classpath"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+  </path>
+  
+  <path id="sctp-impl.runtime.module.classpath">
+    <pathelement location="${sctp-impl.testoutput.dir}"/>
+    <pathelement location="${sctp-impl.output.dir}"/>
+    <path refid="sctp-api.runtime.module.classpath"/>
+    <pathelement location="${basedir}/repository/commons/log4j-1.2.16.jar"/>
+    <path refid="library.rt.classpath"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.sctp-impl">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.sctp-impl">
+    <patternset refid="excluded.from.module.sctp-impl"/>
+  </patternset>
+  
+  <path id="sctp-impl.module.sourcepath">
+    <dirset dir="${module.sctp-impl.basedir}">
+      <include name="src/java/main"/>
+    </dirset>
+  </path>
+  
+  <path id="sctp-impl.module.test.sourcepath">
+    <dirset dir="${module.sctp-impl.basedir}">
+      <include name="src/java/test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.sctp-impl" depends="compile.module.sctp-impl.production,compile.module.sctp-impl.tests" description="Compile module sctp-impl"/>
+  
+  <target name="compile.module.sctp-impl.production" depends="register.custom.compilers,compile.module.sctp-api" description="Compile module sctp-impl; production classes">
+    <mkdir dir="${sctp-impl.output.dir}"/>
+    <javac2 destdir="${sctp-impl.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.sctp-impl}/javac">
+      <compilerarg line="${compiler.args.sctp-impl}"/>
+      <bootclasspath refid="sctp-impl.module.bootclasspath"/>
+      <classpath refid="sctp-impl.module.production.classpath"/>
+      <src refid="sctp-impl.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.sctp-impl"/>
+    </javac2>
+    
+    <copy todir="${sctp-impl.output.dir}">
+      <fileset dir="${module.sctp-impl.basedir}/src/java/main">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.sctp-impl.tests" depends="register.custom.compilers,compile.module.sctp-impl.production" description="compile module sctp-impl; test classes" unless="skip.tests">
+    <mkdir dir="${sctp-impl.testoutput.dir}"/>
+    <javac2 destdir="${sctp-impl.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.sctp-impl}/javac">
+      <compilerarg line="${compiler.args.sctp-impl}"/>
+      <bootclasspath refid="sctp-impl.module.bootclasspath"/>
+      <classpath refid="sctp-impl.module.classpath"/>
+      <src refid="sctp-impl.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.sctp-impl"/>
+    </javac2>
+    
+    <copy todir="${sctp-impl.testoutput.dir}">
+      <fileset dir="${module.sctp-impl.basedir}/src/java/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.sctp-impl" description="cleanup module">
+    <delete dir="${sctp-impl.output.dir}"/>
+    <delete dir="${sctp-impl.testoutput.dir}"/>
+  </target>
+</project>

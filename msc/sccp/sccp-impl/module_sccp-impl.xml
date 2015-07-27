@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_sccp-impl" default="compile.module.sccp-impl">
+  <dirname property="module.sccp-impl.basedir" file="${ant.file.module_sccp-impl}"/>
+  
+  <property name="module.jdk.home.sccp-impl" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.sccp-impl" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.sccp-impl" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.sccp-impl" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
+  
+  <property name="sccp-impl.output.dir" value="${module.sccp-impl.basedir}/../../out/production/sccp-impl"/>
+  <property name="sccp-impl.testoutput.dir" value="${module.sccp-impl.basedir}/../../out/test/sccp-impl"/>
+  
+  <path id="sccp-impl.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="sccp-impl.module.production.classpath">
+    <path refid="${module.jdk.classpath.sccp-impl}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <pathelement location="${sccp-api.output.dir}"/>
+    <pathelement location="${mtp-api.output.dir}"/>
+    <pathelement location="${mtp-impl.output.dir}"/>
+    <pathelement location="${shell-server-api.output.dir}"/>
+  </path>
+  
+  <path id="sccp-impl.runtime.production.module.classpath">
+    <pathelement location="${sccp-impl.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <path refid="sccp-api.runtime.production.module.classpath"/>
+    <path refid="mtp-api.runtime.production.module.classpath"/>
+    <path refid="mtp-impl.runtime.production.module.classpath"/>
+    <path refid="shell-server-api.runtime.production.module.classpath"/>
+  </path>
+  
+  <path id="sccp-impl.module.classpath">
+    <path refid="${module.jdk.classpath.sccp-impl}"/>
+    <pathelement location="${sccp-impl.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <pathelement location="${sccp-api.testoutput.dir}"/>
+    <pathelement location="${sccp-api.output.dir}"/>
+    <pathelement location="${mtp-api.testoutput.dir}"/>
+    <pathelement location="${mtp-api.output.dir}"/>
+    <pathelement location="${mtp-impl.testoutput.dir}"/>
+    <pathelement location="${mtp-impl.output.dir}"/>
+    <pathelement location="${shell-server-api.testoutput.dir}"/>
+    <pathelement location="${shell-server-api.output.dir}"/>
+  </path>
+  
+  <path id="sccp-impl.runtime.module.classpath">
+    <pathelement location="${sccp-impl.testoutput.dir}"/>
+    <pathelement location="${sccp-impl.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <path refid="sccp-api.runtime.module.classpath"/>
+    <path refid="mtp-api.runtime.module.classpath"/>
+    <path refid="mtp-impl.runtime.module.classpath"/>
+    <path refid="shell-server-api.runtime.module.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.sccp-impl">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.sccp-impl">
+    <patternset refid="excluded.from.module.sccp-impl"/>
+  </patternset>
+  
+  <path id="sccp-impl.module.sourcepath">
+    <dirset dir="${module.sccp-impl.basedir}">
+      <include name="src/java/main"/>
+    </dirset>
+  </path>
+  
+  <path id="sccp-impl.module.test.sourcepath">
+    <dirset dir="${module.sccp-impl.basedir}">
+      <include name="src/java/test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.sccp-impl" depends="compile.module.sccp-impl.production,compile.module.sccp-impl.tests" description="Compile module sccp-impl"/>
+  
+  <target name="compile.module.sccp-impl.production" depends="register.custom.compilers,compile.module.sccp-api,compile.module.mtp-api,compile.module.mtp-impl,compile.module.shell-server-api" description="Compile module sccp-impl; production classes">
+    <mkdir dir="${sccp-impl.output.dir}"/>
+    <javac2 destdir="${sccp-impl.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.sccp-impl}/javac">
+      <compilerarg line="${compiler.args.sccp-impl}"/>
+      <bootclasspath refid="sccp-impl.module.bootclasspath"/>
+      <classpath refid="sccp-impl.module.production.classpath"/>
+      <src refid="sccp-impl.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.sccp-impl"/>
+    </javac2>
+    
+    <copy todir="${sccp-impl.output.dir}">
+      <fileset dir="${module.sccp-impl.basedir}/src/java/main">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.sccp-impl.tests" depends="register.custom.compilers,compile.module.sccp-impl.production" description="compile module sccp-impl; test classes" unless="skip.tests">
+    <mkdir dir="${sccp-impl.testoutput.dir}"/>
+    <javac2 destdir="${sccp-impl.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.sccp-impl}/javac">
+      <compilerarg line="${compiler.args.sccp-impl}"/>
+      <bootclasspath refid="sccp-impl.module.bootclasspath"/>
+      <classpath refid="sccp-impl.module.classpath"/>
+      <src refid="sccp-impl.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.sccp-impl"/>
+    </javac2>
+    
+    <copy todir="${sccp-impl.testoutput.dir}">
+      <fileset dir="${module.sccp-impl.basedir}/src/java/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.sccp-impl" description="cleanup module">
+    <delete dir="${sccp-impl.output.dir}"/>
+    <delete dir="${sccp-impl.testoutput.dir}"/>
+  </target>
+</project>

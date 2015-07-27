@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_tcap-api" default="compile.module.tcap-api">
+  <dirname property="module.tcap-api.basedir" file="${ant.file.module_tcap-api}"/>
+  
+  <property name="module.jdk.home.tcap-api" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.tcap-api" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.tcap-api" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.tcap-api" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
+  
+  <property name="tcap-api.output.dir" value="${module.tcap-api.basedir}/../../out/production/tcap-api"/>
+  <property name="tcap-api.testoutput.dir" value="${module.tcap-api.basedir}/../../out/test/tcap-api"/>
+  
+  <path id="tcap-api.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="tcap-api.module.production.classpath">
+    <path refid="${module.jdk.classpath.tcap-api}"/>
+    <pathelement location="${sccp-api.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <pathelement location="${asn-impl.output.dir}"/>
+    <pathelement location="${statistics-api.output.dir}"/>
+  </path>
+  
+  <path id="tcap-api.runtime.production.module.classpath">
+    <pathelement location="${tcap-api.output.dir}"/>
+    <path refid="sccp-api.runtime.production.module.classpath"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <path refid="asn-impl.runtime.production.module.classpath"/>
+    <path refid="statistics-api.runtime.production.module.classpath"/>
+  </path>
+  
+  <path id="tcap-api.module.classpath">
+    <path refid="${module.jdk.classpath.tcap-api}"/>
+    <pathelement location="${tcap-api.output.dir}"/>
+    <pathelement location="${sccp-api.testoutput.dir}"/>
+    <pathelement location="${sccp-api.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <pathelement location="${asn-impl.testoutput.dir}"/>
+    <pathelement location="${asn-impl.output.dir}"/>
+    <pathelement location="${statistics-api.testoutput.dir}"/>
+    <pathelement location="${statistics-api.output.dir}"/>
+  </path>
+  
+  <path id="tcap-api.runtime.module.classpath">
+    <pathelement location="${tcap-api.testoutput.dir}"/>
+    <pathelement location="${tcap-api.output.dir}"/>
+    <path refid="sccp-api.runtime.module.classpath"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <path refid="asn-impl.runtime.module.classpath"/>
+    <path refid="statistics-api.runtime.module.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.tcap-api">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.tcap-api">
+    <patternset refid="excluded.from.module.tcap-api"/>
+  </patternset>
+  
+  <path id="tcap-api.module.sourcepath">
+    <dirset dir="${module.tcap-api.basedir}">
+      <include name="src/java/main"/>
+    </dirset>
+  </path>
+  
+  <path id="tcap-api.module.test.sourcepath">
+    <dirset dir="${module.tcap-api.basedir}">
+      <include name="src/java/test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.tcap-api" depends="compile.module.tcap-api.production,compile.module.tcap-api.tests" description="Compile module tcap-api"/>
+  
+  <target name="compile.module.tcap-api.production" depends="register.custom.compilers,compile.module.sccp-api,compile.module.asn-impl,compile.module.statistics-api" description="Compile module tcap-api; production classes">
+    <mkdir dir="${tcap-api.output.dir}"/>
+    <javac2 destdir="${tcap-api.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.tcap-api}/javac">
+      <compilerarg line="${compiler.args.tcap-api}"/>
+      <bootclasspath refid="tcap-api.module.bootclasspath"/>
+      <classpath refid="tcap-api.module.production.classpath"/>
+      <src refid="tcap-api.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.tcap-api"/>
+    </javac2>
+    
+    <copy todir="${tcap-api.output.dir}">
+      <fileset dir="${module.tcap-api.basedir}/src/java/main">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.tcap-api.tests" depends="register.custom.compilers,compile.module.tcap-api.production" description="compile module tcap-api; test classes" unless="skip.tests">
+    <mkdir dir="${tcap-api.testoutput.dir}"/>
+    <javac2 destdir="${tcap-api.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.tcap-api}/javac">
+      <compilerarg line="${compiler.args.tcap-api}"/>
+      <bootclasspath refid="tcap-api.module.bootclasspath"/>
+      <classpath refid="tcap-api.module.classpath"/>
+      <src refid="tcap-api.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.tcap-api"/>
+    </javac2>
+    
+    <copy todir="${tcap-api.testoutput.dir}">
+      <fileset dir="${module.tcap-api.basedir}/src/java/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.tcap-api" description="cleanup module">
+    <delete dir="${tcap-api.output.dir}"/>
+    <delete dir="${tcap-api.testoutput.dir}"/>
+  </target>
+</project>

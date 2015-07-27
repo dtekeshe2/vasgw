@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_statistics-impl" default="compile.module.statistics-impl">
+  <dirname property="module.statistics-impl.basedir" file="${ant.file.module_statistics-impl}"/>
+  
+  <property name="module.jdk.home.statistics-impl" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.statistics-impl" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.statistics-impl" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.statistics-impl" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
+  
+  <property name="statistics-impl.output.dir" value="${module.statistics-impl.basedir}/../../out/production/statistics-impl"/>
+  <property name="statistics-impl.testoutput.dir" value="${module.statistics-impl.basedir}/../../out/test/statistics-impl"/>
+  
+  <path id="statistics-impl.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="statistics-impl.module.production.classpath">
+    <path refid="${module.jdk.classpath.statistics-impl}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <pathelement location="${statistics-api.output.dir}"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  <path id="statistics-impl.runtime.production.module.classpath">
+    <pathelement location="${statistics-impl.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="statistics-api.runtime.production.module.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  <path id="statistics-impl.module.classpath">
+    <path refid="${module.jdk.classpath.statistics-impl}"/>
+    <pathelement location="${statistics-impl.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <pathelement location="${statistics-api.testoutput.dir}"/>
+    <pathelement location="${statistics-api.output.dir}"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  <path id="statistics-impl.runtime.module.classpath">
+    <pathelement location="${statistics-impl.testoutput.dir}"/>
+    <pathelement location="${statistics-impl.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="statistics-api.runtime.module.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.statistics-impl">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.statistics-impl">
+    <patternset refid="excluded.from.module.statistics-impl"/>
+  </patternset>
+  
+  <path id="statistics-impl.module.sourcepath">
+    <dirset dir="${module.statistics-impl.basedir}">
+      <include name="src/java/main"/>
+    </dirset>
+  </path>
+  
+  <path id="statistics-impl.module.test.sourcepath">
+    <dirset dir="${module.statistics-impl.basedir}">
+      <include name="src/java/test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.statistics-impl" depends="compile.module.statistics-impl.production,compile.module.statistics-impl.tests" description="Compile module statistics-impl"/>
+  
+  <target name="compile.module.statistics-impl.production" depends="register.custom.compilers,compile.module.statistics-api" description="Compile module statistics-impl; production classes">
+    <mkdir dir="${statistics-impl.output.dir}"/>
+    <javac2 destdir="${statistics-impl.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.statistics-impl}/javac">
+      <compilerarg line="${compiler.args.statistics-impl}"/>
+      <bootclasspath refid="statistics-impl.module.bootclasspath"/>
+      <classpath refid="statistics-impl.module.production.classpath"/>
+      <src refid="statistics-impl.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.statistics-impl"/>
+    </javac2>
+    
+    <copy todir="${statistics-impl.output.dir}">
+      <fileset dir="${module.statistics-impl.basedir}/src/java/main">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.statistics-impl.tests" depends="register.custom.compilers,compile.module.statistics-impl.production" description="compile module statistics-impl; test classes" unless="skip.tests">
+    <mkdir dir="${statistics-impl.testoutput.dir}"/>
+    <javac2 destdir="${statistics-impl.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.statistics-impl}/javac">
+      <compilerarg line="${compiler.args.statistics-impl}"/>
+      <bootclasspath refid="statistics-impl.module.bootclasspath"/>
+      <classpath refid="statistics-impl.module.classpath"/>
+      <src refid="statistics-impl.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.statistics-impl"/>
+    </javac2>
+    
+    <copy todir="${statistics-impl.testoutput.dir}">
+      <fileset dir="${module.statistics-impl.basedir}/src/java/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.statistics-impl" description="cleanup module">
+    <delete dir="${statistics-impl.output.dir}"/>
+    <delete dir="${statistics-impl.testoutput.dir}"/>
+  </target>
+</project>

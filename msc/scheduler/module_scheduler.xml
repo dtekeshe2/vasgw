@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_scheduler" default="compile.module.scheduler">
+  <dirname property="module.scheduler.basedir" file="${ant.file.module_scheduler}"/>
+  
+  <property name="module.jdk.home.scheduler" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.scheduler" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.scheduler" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.scheduler" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
+  
+  <property name="scheduler.output.dir" value="${module.scheduler.basedir}/../out/production/scheduler"/>
+  <property name="scheduler.testoutput.dir" value="${module.scheduler.basedir}/../out/test/scheduler"/>
+  
+  <path id="scheduler.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="scheduler.module.production.classpath">
+    <path refid="${module.jdk.classpath.scheduler}"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  <path id="scheduler.runtime.production.module.classpath">
+    <pathelement location="${scheduler.output.dir}"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  <path id="scheduler.module.classpath">
+    <path refid="${module.jdk.classpath.scheduler}"/>
+    <pathelement location="${scheduler.output.dir}"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  <path id="scheduler.runtime.module.classpath">
+    <pathelement location="${scheduler.testoutput.dir}"/>
+    <pathelement location="${scheduler.output.dir}"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.scheduler">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.scheduler">
+    <patternset refid="excluded.from.module.scheduler"/>
+  </patternset>
+  
+  <path id="scheduler.module.sourcepath">
+    <dirset dir="${module.scheduler.basedir}">
+      <include name="src/java/main"/>
+    </dirset>
+  </path>
+  
+  <path id="scheduler.module.test.sourcepath">
+    <dirset dir="${module.scheduler.basedir}">
+      <include name="src/java/test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.scheduler" depends="compile.module.scheduler.production,compile.module.scheduler.tests" description="Compile module scheduler"/>
+  
+  <target name="compile.module.scheduler.production" depends="register.custom.compilers" description="Compile module scheduler; production classes">
+    <mkdir dir="${scheduler.output.dir}"/>
+    <javac2 destdir="${scheduler.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.scheduler}/javac">
+      <compilerarg line="${compiler.args.scheduler}"/>
+      <bootclasspath refid="scheduler.module.bootclasspath"/>
+      <classpath refid="scheduler.module.production.classpath"/>
+      <src refid="scheduler.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.scheduler"/>
+    </javac2>
+    
+    <copy todir="${scheduler.output.dir}">
+      <fileset dir="${module.scheduler.basedir}/src/java/main">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.scheduler.tests" depends="register.custom.compilers,compile.module.scheduler.production" description="compile module scheduler; test classes" unless="skip.tests">
+    <mkdir dir="${scheduler.testoutput.dir}"/>
+    <javac2 destdir="${scheduler.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.scheduler}/javac">
+      <compilerarg line="${compiler.args.scheduler}"/>
+      <bootclasspath refid="scheduler.module.bootclasspath"/>
+      <classpath refid="scheduler.module.classpath"/>
+      <src refid="scheduler.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.scheduler"/>
+    </javac2>
+    
+    <copy todir="${scheduler.testoutput.dir}">
+      <fileset dir="${module.scheduler.basedir}/src/java/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.scheduler" description="cleanup module">
+    <delete dir="${scheduler.output.dir}"/>
+    <delete dir="${scheduler.testoutput.dir}"/>
+  </target>
+</project>

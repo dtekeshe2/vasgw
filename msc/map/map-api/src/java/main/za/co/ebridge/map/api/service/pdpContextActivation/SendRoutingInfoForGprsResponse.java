@@ -1,0 +1,29 @@
+/* eBridge SS7 */
+
+package za.co.ebridge.map.api.service.pdpContextActivation;
+
+import za.co.ebridge.map.api.primitives.GSNAddress;
+import za.co.ebridge.map.api.primitives.MAPExtensionContainer;
+
+/**
+ *
+ SendRoutingInfoForGprsRes ::= SEQUENCE { sgsn-Address [0] GSN-Address, ggsn-Address [1] GSN-Address OPTIONAL,
+ * mobileNotReachableReason [2] AbsentSubscriberDiagnosticSM OPTIONAL, extensionContainer [3] ExtensionContainer OPTIONAL, ...}
+ *
+ * AbsentSubscriberDiagnosticSM ::= INTEGER (0..255) -- AbsentSubscriberDiagnosticSM values are defined in 3GPP TS 23.040
+ *
+ *
+ * @author david@tekeshe.com
+ *
+ */
+public interface SendRoutingInfoForGprsResponse extends PdpContextActivationMessage {
+
+    GSNAddress getSgsnAddress();
+
+    GSNAddress getGgsnAddress();
+
+    Integer getMobileNotReachableReason();
+
+    MAPExtensionContainer getExtensionContainer();
+
+}

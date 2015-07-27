@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_ebridgemscinterface" default="compile.module.ebridgemscinterface">
+  <dirname property="module.ebridgemscinterface.basedir" file="${ant.file.module_ebridgemscinterface}"/>
+  
+  <property name="module.jdk.home.ebridgemscinterface" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.ebridgemscinterface" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.ebridgemscinterface" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.ebridgemscinterface" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
+  
+  <property name="ebridgemscinterface.output.dir" value="${module.ebridgemscinterface.basedir}/out/production/eBridgeMSCInterface"/>
+  <property name="ebridgemscinterface.testoutput.dir" value="${module.ebridgemscinterface.basedir}/out/test/eBridgeMSCInterface"/>
+  
+  <path id="ebridgemscinterface.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="ebridgemscinterface.module.production.classpath">
+    <path refid="${module.jdk.classpath.ebridgemscinterface}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  <path id="ebridgemscinterface.runtime.production.module.classpath">
+    <pathelement location="${ebridgemscinterface.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  <path id="ebridgemscinterface.module.classpath">
+    <path refid="${module.jdk.classpath.ebridgemscinterface}"/>
+    <pathelement location="${ebridgemscinterface.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  <path id="ebridgemscinterface.runtime.module.classpath">
+    <pathelement location="${ebridgemscinterface.testoutput.dir}"/>
+    <pathelement location="${ebridgemscinterface.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.ebridgemscinterface">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.ebridgemscinterface">
+    <patternset refid="excluded.from.module.ebridgemscinterface"/>
+  </patternset>
+  
+  
+  <target name="compile.module.ebridgemscinterface" depends="compile.module.ebridgemscinterface.production,compile.module.ebridgemscinterface.tests" description="Compile module eBridgeMSCInterface"/>
+  
+  <target name="compile.module.ebridgemscinterface.production" depends="register.custom.compilers" description="Compile module eBridgeMSCInterface; production classes"/>
+  
+  <target name="compile.module.ebridgemscinterface.tests" depends="register.custom.compilers,compile.module.ebridgemscinterface.production" description="compile module eBridgeMSCInterface; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.ebridgemscinterface" description="cleanup module">
+    <delete dir="${ebridgemscinterface.output.dir}"/>
+    <delete dir="${ebridgemscinterface.testoutput.dir}"/>
+  </target>
+</project>

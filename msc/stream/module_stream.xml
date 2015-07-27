@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_stream" default="compile.module.stream">
+  <dirname property="module.stream.basedir" file="${ant.file.module_stream}"/>
+  
+  <property name="module.jdk.home.stream" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.stream" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.stream" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.stream" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
+  
+  <property name="stream.output.dir" value="${module.stream.basedir}/../out/production/stream"/>
+  <property name="stream.testoutput.dir" value="${module.stream.basedir}/../out/test/stream"/>
+  
+  <path id="stream.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="stream.module.production.classpath">
+    <path refid="${module.jdk.classpath.stream}"/>
+  </path>
+  
+  <path id="stream.runtime.production.module.classpath">
+    <pathelement location="${stream.output.dir}"/>
+  </path>
+  
+  <path id="stream.module.classpath">
+    <path refid="${module.jdk.classpath.stream}"/>
+    <pathelement location="${stream.output.dir}"/>
+  </path>
+  
+  <path id="stream.runtime.module.classpath">
+    <pathelement location="${stream.testoutput.dir}"/>
+    <pathelement location="${stream.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.stream">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.stream">
+    <patternset refid="excluded.from.module.stream"/>
+  </patternset>
+  
+  <path id="stream.module.sourcepath">
+    <dirset dir="${module.stream.basedir}">
+      <include name="src/java/main"/>
+    </dirset>
+  </path>
+  
+  <path id="stream.module.test.sourcepath">
+    <dirset dir="${module.stream.basedir}">
+      <include name="src/java/test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.stream" depends="compile.module.stream.production,compile.module.stream.tests" description="Compile module stream"/>
+  
+  <target name="compile.module.stream.production" depends="register.custom.compilers" description="Compile module stream; production classes">
+    <mkdir dir="${stream.output.dir}"/>
+    <javac2 destdir="${stream.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.stream}/javac">
+      <compilerarg line="${compiler.args.stream}"/>
+      <bootclasspath refid="stream.module.bootclasspath"/>
+      <classpath refid="stream.module.production.classpath"/>
+      <src refid="stream.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.stream"/>
+    </javac2>
+    
+    <copy todir="${stream.output.dir}">
+      <fileset dir="${module.stream.basedir}/src/java/main">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.stream.tests" depends="register.custom.compilers,compile.module.stream.production" description="compile module stream; test classes" unless="skip.tests">
+    <mkdir dir="${stream.testoutput.dir}"/>
+    <javac2 destdir="${stream.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.stream}/javac">
+      <compilerarg line="${compiler.args.stream}"/>
+      <bootclasspath refid="stream.module.bootclasspath"/>
+      <classpath refid="stream.module.classpath"/>
+      <src refid="stream.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.stream"/>
+    </javac2>
+    
+    <copy todir="${stream.testoutput.dir}">
+      <fileset dir="${module.stream.basedir}/src/java/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.stream" description="cleanup module">
+    <delete dir="${stream.output.dir}"/>
+    <delete dir="${stream.testoutput.dir}"/>
+  </target>
+</project>

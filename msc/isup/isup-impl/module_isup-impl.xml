@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_isup-impl" default="compile.module.isup-impl">
+  <dirname property="module.isup-impl.basedir" file="${ant.file.module_isup-impl}"/>
+  
+  <property name="module.jdk.home.isup-impl" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.isup-impl" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.isup-impl" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.isup-impl" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
+  
+  <property name="isup-impl.output.dir" value="${module.isup-impl.basedir}/../../out/production/isup-impl"/>
+  <property name="isup-impl.testoutput.dir" value="${module.isup-impl.basedir}/../../out/test/isup-impl"/>
+  
+  <path id="isup-impl.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="isup-impl.module.production.classpath">
+    <path refid="${module.jdk.classpath.isup-impl}"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <pathelement location="${isup-api.output.dir}"/>
+    <pathelement location="${scheduler.output.dir}"/>
+    <pathelement location="${mtp-api.output.dir}"/>
+    <pathelement location="${mtp-impl.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <pathelement location="${asn-impl.output.dir}"/>
+  </path>
+  
+  <path id="isup-impl.runtime.production.module.classpath">
+    <pathelement location="${isup-impl.output.dir}"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <path refid="isup-api.runtime.production.module.classpath"/>
+    <path refid="scheduler.runtime.production.module.classpath"/>
+    <path refid="mtp-api.runtime.production.module.classpath"/>
+    <path refid="mtp-impl.runtime.production.module.classpath"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="asn-impl.runtime.production.module.classpath"/>
+  </path>
+  
+  <path id="isup-impl.module.classpath">
+    <path refid="${module.jdk.classpath.isup-impl}"/>
+    <pathelement location="${isup-impl.output.dir}"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <pathelement location="${isup-api.testoutput.dir}"/>
+    <pathelement location="${isup-api.output.dir}"/>
+    <pathelement location="${scheduler.testoutput.dir}"/>
+    <pathelement location="${scheduler.output.dir}"/>
+    <pathelement location="${mtp-api.testoutput.dir}"/>
+    <pathelement location="${mtp-api.output.dir}"/>
+    <pathelement location="${mtp-impl.testoutput.dir}"/>
+    <pathelement location="${mtp-impl.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <pathelement location="${asn-impl.testoutput.dir}"/>
+    <pathelement location="${asn-impl.output.dir}"/>
+  </path>
+  
+  <path id="isup-impl.runtime.module.classpath">
+    <pathelement location="${isup-impl.testoutput.dir}"/>
+    <pathelement location="${isup-impl.output.dir}"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <path refid="isup-api.runtime.module.classpath"/>
+    <path refid="scheduler.runtime.module.classpath"/>
+    <path refid="mtp-api.runtime.module.classpath"/>
+    <path refid="mtp-impl.runtime.module.classpath"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="asn-impl.runtime.module.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.isup-impl">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.isup-impl">
+    <patternset refid="excluded.from.module.isup-impl"/>
+  </patternset>
+  
+  <path id="isup-impl.module.sourcepath">
+    <dirset dir="${module.isup-impl.basedir}">
+      <include name="src/java/main"/>
+    </dirset>
+  </path>
+  
+  <path id="isup-impl.module.test.sourcepath">
+    <dirset dir="${module.isup-impl.basedir}">
+      <include name="src/java/test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.isup-impl" depends="compile.module.isup-impl.production,compile.module.isup-impl.tests" description="Compile module isup-impl"/>
+  
+  <target name="compile.module.isup-impl.production" depends="register.custom.compilers,compile.module.isup-api,compile.module.scheduler,compile.module.mtp-api,compile.module.mtp-impl,compile.module.asn-impl" description="Compile module isup-impl; production classes">
+    <mkdir dir="${isup-impl.output.dir}"/>
+    <javac2 destdir="${isup-impl.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.isup-impl}/javac">
+      <compilerarg line="${compiler.args.isup-impl}"/>
+      <bootclasspath refid="isup-impl.module.bootclasspath"/>
+      <classpath refid="isup-impl.module.production.classpath"/>
+      <src refid="isup-impl.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.isup-impl"/>
+    </javac2>
+    
+    <copy todir="${isup-impl.output.dir}">
+      <fileset dir="${module.isup-impl.basedir}/src/java/main">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.isup-impl.tests" depends="register.custom.compilers,compile.module.isup-impl.production" description="compile module isup-impl; test classes" unless="skip.tests">
+    <mkdir dir="${isup-impl.testoutput.dir}"/>
+    <javac2 destdir="${isup-impl.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.isup-impl}/javac">
+      <compilerarg line="${compiler.args.isup-impl}"/>
+      <bootclasspath refid="isup-impl.module.bootclasspath"/>
+      <classpath refid="isup-impl.module.classpath"/>
+      <src refid="isup-impl.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.isup-impl"/>
+    </javac2>
+    
+    <copy todir="${isup-impl.testoutput.dir}">
+      <fileset dir="${module.isup-impl.basedir}/src/java/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.isup-impl" description="cleanup module">
+    <delete dir="${isup-impl.output.dir}"/>
+    <delete dir="${isup-impl.testoutput.dir}"/>
+  </target>
+</project>

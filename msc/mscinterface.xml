@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ebridgemscinterface" default="all">
+  
+  
+  <property file="mscinterface.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/rcs/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/.pyc/**"/>
+    <exclude name="**/.pyo/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/*.lib/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/.bundle/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*.o/**"/>
+    <exclude name="**/*.obj/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.ear"/>
+    <include name="*.apk"/>
+    <include name="*.zip"/>
+    <include name="*.swc"/>
+    <include name="*.ane"/>
+    <include name="*.egg"/>
+    <include name="*.jar"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.1.7" value="${jdk.home.1.7}/bin"/>
+  <path id="jdk.classpath.1.7">
+    <fileset dir="${jdk.home.1.7}">
+      <include name="lib/ant-javafx.jar"/>
+      <include name="lib/dt.jar"/>
+      <include name="lib/javafx-doclet.jar"/>
+      <include name="lib/javafx-mx.jar"/>
+      <include name="lib/jconsole.jar"/>
+      <include name="lib/sa-jdi.jar"/>
+      <include name="lib/tools.jar"/>
+      <include name="jre/lib/charsets.jar"/>
+      <include name="jre/lib/deploy.jar"/>
+      <include name="jre/lib/htmlconverter.jar"/>
+      <include name="jre/lib/javaws.jar"/>
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/jfr.jar"/>
+      <include name="jre/lib/jfxrt.jar"/>
+      <include name="jre/lib/JObjC.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
+      <include name="jre/lib/plugin.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/rt.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
+      <include name="jre/lib/ext/sunec.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+      <include name="jre/lib/ext/sunpkcs11.jar"/>
+      <include name="jre/lib/ext/zipfs.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.7}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.7}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.7"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.javolution-core-java-6.0.1-20130819.063134-2.classpath">
+    <pathelement location="${basedir}/repository/commons/javolution-core-java-6.0.1-20130819.063134-2.jar"/>
+  </path>
+  
+  <path id="library.log4j-1.2.16.classpath">
+    <pathelement location="${basedir}/repository/commons/log4j-1.2.16.jar"/>
+  </path>
+  
+  <path id="library.rt.classpath">
+    <pathelement location="${basedir}/repository/rt.jar"/>
+  </path>
+  
+  
+  <!-- Application Server Libraries -->
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <pathelement location="${javac2.home}/javac2.jar"/>
+    <pathelement location="${javac2.home}/jdom.jar"/>
+    <pathelement location="${javac2.home}/asm4-all.jar"/>
+    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  <import file="${basedir}/asn/asn-impl/module_asn-impl.xml"/>
+  
+  <import file="${basedir}/commons/module_commons.xml"/>
+  
+  <import file="${basedir}/congestion/module_congestion.xml"/>
+  
+  <import file="${basedir}/module_ebridgemscinterface.xml"/>
+  
+  <import file="${basedir}/mtp/mtp-api/module_mtp-api.xml"/>
+  
+  <import file="${basedir}/repository/module_repository.xml"/>
+  
+  <import file="${basedir}/scheduler/module_scheduler.xml"/>
+  
+  <import file="${basedir}/management/shell-server-api/module_shell-server-api.xml"/>
+  
+  <import file="${basedir}/management/shell-server-impl/module_shell-server-impl.xml"/>
+  
+  <import file="${basedir}/statistics/statistics-api/module_statistics-api.xml"/>
+  
+  <import file="${basedir}/stream/module_stream.xml"/>
+  
+  <import file="${basedir}/isup/isup-api/module_isup-api.xml"/>
+  
+  <import file="${basedir}/mtp/mtp-impl/module_mtp-impl.xml"/>
+  
+  <import file="${basedir}/sccp/sccp-api/module_sccp-api.xml"/>
+  
+  <import file="${basedir}/sctp/sctp-api/module_sctp-api.xml"/>
+  
+  <import file="${basedir}/statistics/statistics-impl/module_statistics-impl.xml"/>
+  
+  <import file="${basedir}/isup/isup-impl/module_isup-impl.xml"/>
+  
+  <import file="${basedir}/m3ua/m3ua-api/module_m3ua-api.xml"/>
+  
+  <import file="${basedir}/sccp/sccp-impl/module_sccp-impl.xml"/>
+  
+  <import file="${basedir}/sctp/sctp-impl/module_sctp-impl.xml"/>
+  
+  <import file="${basedir}/tcap/tcap-api/module_tcap-api.xml"/>
+  
+  <import file="${basedir}/map/map-api/module_map-api.xml"/>
+  
+  <import file="${basedir}/tcap/tcap-impl/module_tcap-impl.xml"/>
+  
+  <import file="${basedir}/map/map-impl/module_map-impl.xml"/>
+  
+  <import file="${basedir}/m3ua/m3ua-impl/module_m3ua-impl.xml"/>
+  
+  <import file="${basedir}/bootstrap/module_bootstrap.xml"/>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.asn-impl, clean.module.commons, clean.module.congestion, clean.module.ebridgemscinterface, clean.module.mtp-api, clean.module.repository, clean.module.scheduler, clean.module.shell-server-api, clean.module.shell-server-impl, clean.module.statistics-api, clean.module.stream, clean.module.isup-api, clean.module.mtp-impl, clean.module.sccp-api, clean.module.sctp-api, clean.module.statistics-impl, clean.module.isup-impl, clean.module.m3ua-api, clean.module.sccp-impl, clean.module.sctp-impl, clean.module.tcap-api, clean.module.map-api, clean.module.tcap-impl, clean.module.map-impl, clean.module.m3ua-impl, clean.module.bootstrap" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.asn-impl, compile.module.commons, compile.module.congestion, compile.module.ebridgemscinterface, compile.module.mtp-api, compile.module.repository, compile.module.scheduler, compile.module.shell-server-api, compile.module.shell-server-impl, compile.module.statistics-api, compile.module.stream, compile.module.isup-api, compile.module.mtp-impl, compile.module.sccp-api, compile.module.sctp-api, compile.module.statistics-impl, compile.module.isup-impl, compile.module.m3ua-api, compile.module.sccp-impl, compile.module.sctp-impl, compile.module.tcap-api, compile.module.map-api, compile.module.tcap-impl, compile.module.map-impl, compile.module.m3ua-impl, compile.module.bootstrap" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.asn-impl:jar" value="${basedir}/../../../../../staging/ebridge/lib/msc"/>
+    <property name="artifact.output.bootstrap:jar" value="${basedir}/../../../../../staging/ebridge/lib/msc"/>
+    <property name="artifact.output.commons:jar" value="${basedir}/../../../../../staging/ebridge/lib/msc"/>
+    <property name="artifact.output.congestion:jar" value="${basedir}/../../../../../staging/ebridge/lib/msc"/>
+    <property name="artifact.output.isup-api:jar" value="${basedir}/../../../../../staging/ebridge/lib/msc"/>
+    <property name="artifact.output.isup-impl:jar" value="${basedir}/../../../../../staging/ebridge/lib/msc"/>
+    <property name="artifact.output.m3ua-api:jar" value="${basedir}/../../../../../staging/ebridge/lib/msc"/>
+    <property name="artifact.output.m3ua-impl:jar" value="${basedir}/../../../../../staging/ebridge/lib/msc"/>
+    <property name="artifact.output.map-api:jar" value="${basedir}/../../../../../staging/ebridge/lib/msc"/>
+    <property name="artifact.output.map-impl:jar" value="${basedir}/../../../../../staging/ebridge/lib/msc"/>
+    <property name="artifact.output.mtp-api:jar" value="${basedir}/../../../../../staging/ebridge/lib/msc"/>
+    <property name="artifact.output.mtp-impl:jar" value="${basedir}/../../../../../staging/ebridge/lib/msc"/>
+    <property name="artifact.output.sccp-api:jar" value="${basedir}/../../../../../staging/ebridge/lib/msc"/>
+    <property name="artifact.output.sccp-impl:jar" value="${basedir}/../../../../../staging/ebridge/lib/msc"/>
+    <property name="artifact.output.scheduler:jar" value="${basedir}/../../../../../staging/ebridge/lib/msc"/>
+    <property name="artifact.output.sctp-api:jar" value="${basedir}/../../../../../staging/ebridge/lib/msc"/>
+    <property name="artifact.output.sctp-impl:jar" value="${basedir}/../../../../../staging/ebridge/lib/msc"/>
+    <property name="artifact.output.shell-server-api:jar" value="${basedir}/../../../../../staging/ebridge/lib/msc"/>
+    <property name="artifact.output.shell-server-impl:jar" value="${basedir}/../../../../../staging/ebridge/lib/msc"/>
+    <property name="artifact.output.statistics-api:jar" value="${basedir}/../../../../../staging/ebridge/lib/msc"/>
+    <property name="artifact.output.statistics-impl:jar" value="${basedir}/../../../../../staging/ebridge/lib/msc"/>
+    <property name="artifact.output.stream:jar" value="${basedir}/../../../../../staging/ebridge/lib/msc"/>
+    <property name="artifact.output.tcap-api:jar" value="${basedir}/../../../../../staging/ebridge/lib/msc"/>
+    <property name="artifact.output.tcap-impl:jar" value="${basedir}/../../../../../staging/ebridge/lib/msc"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="temp.jar.path.asn-impl.jar" value="${artifacts.temp.dir}/asn-impl.jar"/>
+    <property name="temp.jar.path.bootstrap.jar" value="${artifacts.temp.dir}/bootstrap.jar"/>
+    <property name="temp.jar.path.commons.jar" value="${artifacts.temp.dir}/commons.jar"/>
+    <property name="temp.jar.path.congestion.jar" value="${artifacts.temp.dir}/congestion.jar"/>
+    <property name="temp.jar.path.isup-api.jar" value="${artifacts.temp.dir}/isup-api.jar"/>
+    <property name="temp.jar.path.isup-impl.jar" value="${artifacts.temp.dir}/isup-impl.jar"/>
+    <property name="temp.jar.path.m3ua-api.jar" value="${artifacts.temp.dir}/m3ua-api.jar"/>
+    <property name="temp.jar.path.m3ua-impl.jar" value="${artifacts.temp.dir}/m3ua-impl.jar"/>
+    <property name="temp.jar.path.map-api.jar" value="${artifacts.temp.dir}/map-api.jar"/>
+    <property name="temp.jar.path.map-impl.jar" value="${artifacts.temp.dir}/map-impl.jar"/>
+    <property name="temp.jar.path.mtp-api.jar" value="${artifacts.temp.dir}/mtp-api.jar"/>
+    <property name="temp.jar.path.mtp-impl.jar" value="${artifacts.temp.dir}/mtp-impl.jar"/>
+    <property name="temp.jar.path.sccp-api.jar" value="${artifacts.temp.dir}/sccp-api.jar"/>
+    <property name="temp.jar.path.sccp-impl.jar" value="${artifacts.temp.dir}/sccp-impl.jar"/>
+    <property name="temp.jar.path.scheduler.jar" value="${artifacts.temp.dir}/scheduler.jar"/>
+    <property name="temp.jar.path.sctp-api.jar" value="${artifacts.temp.dir}/sctp-api.jar"/>
+    <property name="temp.jar.path.sctp-impl.jar" value="${artifacts.temp.dir}/sctp-impl.jar"/>
+    <property name="temp.jar.path.shell-server-api.jar" value="${artifacts.temp.dir}/shell-server-api.jar"/>
+    <property name="temp.jar.path.shell-server-impl.jar" value="${artifacts.temp.dir}/shell-server-impl.jar"/>
+    <property name="temp.jar.path.statistics-api.jar" value="${artifacts.temp.dir}/statistics-api.jar"/>
+    <property name="temp.jar.path.statistics-impl.jar" value="${artifacts.temp.dir}/statistics-impl.jar"/>
+    <property name="temp.jar.path.stream.jar" value="${artifacts.temp.dir}/stream.jar"/>
+    <property name="temp.jar.path.tcap-api.jar" value="${artifacts.temp.dir}/tcap-api.jar"/>
+    <property name="temp.jar.path.tcap-impl.jar" value="${artifacts.temp.dir}/tcap-impl.jar"/>
+  </target>
+  
+  <target name="artifact.asn-impl:jar" depends="init.artifacts, compile.module.asn-impl" description="Build &#39;asn-impl:jar&#39; artifact">
+    <property name="artifact.temp.output.asn-impl:jar" value="${artifacts.temp.dir}/asn_impl_jar"/>
+    <mkdir dir="${artifact.temp.output.asn-impl:jar}"/>
+    <jar destfile="${temp.jar.path.asn-impl.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${asn-impl.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.asn-impl.jar}" tofile="${artifact.temp.output.asn-impl:jar}/asn-impl.jar"/>
+  </target>
+  
+  <target name="artifact.bootstrap:jar" depends="init.artifacts, compile.module.bootstrap" description="Build &#39;bootstrap:jar&#39; artifact">
+    <property name="artifact.temp.output.bootstrap:jar" value="${artifacts.temp.dir}/bootstrap_jar"/>
+    <mkdir dir="${artifact.temp.output.bootstrap:jar}"/>
+    <jar destfile="${temp.jar.path.bootstrap.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${bootstrap.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.bootstrap.jar}" tofile="${artifact.temp.output.bootstrap:jar}/bootstrap.jar"/>
+  </target>
+  
+  <target name="artifact.commons:jar" depends="init.artifacts, compile.module.commons" description="Build &#39;commons:jar&#39; artifact">
+    <property name="artifact.temp.output.commons:jar" value="${artifacts.temp.dir}/commons_jar"/>
+    <mkdir dir="${artifact.temp.output.commons:jar}"/>
+    <jar destfile="${temp.jar.path.commons.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${commons.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.commons.jar}" tofile="${artifact.temp.output.commons:jar}/commons.jar"/>
+  </target>
+  
+  <target name="artifact.congestion:jar" depends="init.artifacts, compile.module.congestion" description="Build &#39;congestion:jar&#39; artifact">
+    <property name="artifact.temp.output.congestion:jar" value="${artifacts.temp.dir}/congestion_jar"/>
+    <mkdir dir="${artifact.temp.output.congestion:jar}"/>
+    <jar destfile="${temp.jar.path.congestion.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${congestion.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.congestion.jar}" tofile="${artifact.temp.output.congestion:jar}/congestion.jar"/>
+  </target>
+  
+  <target name="artifact.isup-api:jar" depends="init.artifacts, compile.module.isup-api" description="Build &#39;isup-api:jar&#39; artifact">
+    <property name="artifact.temp.output.isup-api:jar" value="${artifacts.temp.dir}/isup_api_jar"/>
+    <mkdir dir="${artifact.temp.output.isup-api:jar}"/>
+    <jar destfile="${temp.jar.path.isup-api.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${isup-api.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.isup-api.jar}" tofile="${artifact.temp.output.isup-api:jar}/isup-api.jar"/>
+  </target>
+  
+  <target name="artifact.isup-impl:jar" depends="init.artifacts, compile.module.isup-impl" description="Build &#39;isup-impl:jar&#39; artifact">
+    <property name="artifact.temp.output.isup-impl:jar" value="${artifacts.temp.dir}/isup_impl_jar"/>
+    <mkdir dir="${artifact.temp.output.isup-impl:jar}"/>
+    <jar destfile="${temp.jar.path.isup-impl.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${isup-impl.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.isup-impl.jar}" tofile="${artifact.temp.output.isup-impl:jar}/isup-impl.jar"/>
+  </target>
+  
+  <target name="artifact.m3ua-api:jar" depends="init.artifacts, compile.module.m3ua-api" description="Build &#39;m3ua-api:jar&#39; artifact">
+    <property name="artifact.temp.output.m3ua-api:jar" value="${artifacts.temp.dir}/m3ua_api_jar"/>
+    <mkdir dir="${artifact.temp.output.m3ua-api:jar}"/>
+    <jar destfile="${temp.jar.path.m3ua-api.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${m3ua-api.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.m3ua-api.jar}" tofile="${artifact.temp.output.m3ua-api:jar}/m3ua-api.jar"/>
+  </target>
+  
+  <target name="artifact.m3ua-impl:jar" depends="init.artifacts, compile.module.m3ua-impl" description="Build &#39;m3ua-impl:jar&#39; artifact">
+    <property name="artifact.temp.output.m3ua-impl:jar" value="${artifacts.temp.dir}/m3ua_impl_jar"/>
+    <mkdir dir="${artifact.temp.output.m3ua-impl:jar}"/>
+    <jar destfile="${temp.jar.path.m3ua-impl.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${m3ua-impl.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.m3ua-impl.jar}" tofile="${artifact.temp.output.m3ua-impl:jar}/m3ua-impl.jar"/>
+  </target>
+  
+  <target name="artifact.map-api:jar" depends="init.artifacts, compile.module.map-api" description="Build &#39;map-api:jar&#39; artifact">
+    <property name="artifact.temp.output.map-api:jar" value="${artifacts.temp.dir}/map_api_jar"/>
+    <mkdir dir="${artifact.temp.output.map-api:jar}"/>
+    <jar destfile="${temp.jar.path.map-api.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${map-api.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.map-api.jar}" tofile="${artifact.temp.output.map-api:jar}/map-api.jar"/>
+  </target>
+  
+  <target name="artifact.map-impl:jar" depends="init.artifacts, compile.module.map-impl" description="Build &#39;map-impl:jar&#39; artifact">
+    <property name="artifact.temp.output.map-impl:jar" value="${artifacts.temp.dir}/map_impl_jar"/>
+    <mkdir dir="${artifact.temp.output.map-impl:jar}"/>
+    <jar destfile="${temp.jar.path.map-impl.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${map-impl.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.map-impl.jar}" tofile="${artifact.temp.output.map-impl:jar}/map-impl.jar"/>
+  </target>
+  
+  <target name="artifact.mtp-api:jar" depends="init.artifacts, compile.module.mtp-api" description="Build &#39;mtp-api:jar&#39; artifact">
+    <property name="artifact.temp.output.mtp-api:jar" value="${artifacts.temp.dir}/mtp_api_jar"/>
+    <mkdir dir="${artifact.temp.output.mtp-api:jar}"/>
+    <jar destfile="${temp.jar.path.mtp-api.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${mtp-api.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.mtp-api.jar}" tofile="${artifact.temp.output.mtp-api:jar}/mtp-api.jar"/>
+  </target>
+  
+  <target name="artifact.mtp-impl:jar" depends="init.artifacts, compile.module.mtp-impl" description="Build &#39;mtp-impl:jar&#39; artifact">
+    <property name="artifact.temp.output.mtp-impl:jar" value="${artifacts.temp.dir}/mtp_impl_jar"/>
+    <mkdir dir="${artifact.temp.output.mtp-impl:jar}"/>
+    <jar destfile="${temp.jar.path.mtp-impl.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${mtp-impl.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.mtp-impl.jar}" tofile="${artifact.temp.output.mtp-impl:jar}/mtp-impl.jar"/>
+  </target>
+  
+  <target name="artifact.sccp-api:jar" depends="init.artifacts, compile.module.sccp-api" description="Build &#39;sccp-api:jar&#39; artifact">
+    <property name="artifact.temp.output.sccp-api:jar" value="${artifacts.temp.dir}/sccp_api_jar"/>
+    <mkdir dir="${artifact.temp.output.sccp-api:jar}"/>
+    <jar destfile="${temp.jar.path.sccp-api.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${sccp-api.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.sccp-api.jar}" tofile="${artifact.temp.output.sccp-api:jar}/sccp-api.jar"/>
+  </target>
+  
+  <target name="artifact.sccp-impl:jar" depends="init.artifacts, compile.module.sccp-impl" description="Build &#39;sccp-impl:jar&#39; artifact">
+    <property name="artifact.temp.output.sccp-impl:jar" value="${artifacts.temp.dir}/sccp_impl_jar"/>
+    <mkdir dir="${artifact.temp.output.sccp-impl:jar}"/>
+    <jar destfile="${temp.jar.path.sccp-impl.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${sccp-impl.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.sccp-impl.jar}" tofile="${artifact.temp.output.sccp-impl:jar}/sccp-impl.jar"/>
+  </target>
+  
+  <target name="artifact.scheduler:jar" depends="init.artifacts, compile.module.scheduler" description="Build &#39;scheduler:jar&#39; artifact">
+    <property name="artifact.temp.output.scheduler:jar" value="${artifacts.temp.dir}/scheduler_jar"/>
+    <mkdir dir="${artifact.temp.output.scheduler:jar}"/>
+    <jar destfile="${temp.jar.path.scheduler.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${scheduler.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.scheduler.jar}" tofile="${artifact.temp.output.scheduler:jar}/scheduler.jar"/>
+  </target>
+  
+  <target name="artifact.sctp-api:jar" depends="init.artifacts, compile.module.sctp-api" description="Build &#39;sctp-api:jar&#39; artifact">
+    <property name="artifact.temp.output.sctp-api:jar" value="${artifacts.temp.dir}/sctp_api_jar"/>
+    <mkdir dir="${artifact.temp.output.sctp-api:jar}"/>
+    <jar destfile="${temp.jar.path.sctp-api.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${sctp-api.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.sctp-api.jar}" tofile="${artifact.temp.output.sctp-api:jar}/sctp-api.jar"/>
+  </target>
+  
+  <target name="artifact.sctp-impl:jar" depends="init.artifacts, compile.module.sctp-impl" description="Build &#39;sctp-impl:jar&#39; artifact">
+    <property name="artifact.temp.output.sctp-impl:jar" value="${artifacts.temp.dir}/sctp_impl_jar"/>
+    <mkdir dir="${artifact.temp.output.sctp-impl:jar}"/>
+    <jar destfile="${temp.jar.path.sctp-impl.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${sctp-impl.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.sctp-impl.jar}" tofile="${artifact.temp.output.sctp-impl:jar}/sctp-impl.jar"/>
+  </target>
+  
+  <target name="artifact.shell-server-api:jar" depends="init.artifacts, compile.module.shell-server-api" description="Build &#39;shell-server-api:jar&#39; artifact">
+    <property name="artifact.temp.output.shell-server-api:jar" value="${artifacts.temp.dir}/shell_server_api_jar"/>
+    <mkdir dir="${artifact.temp.output.shell-server-api:jar}"/>
+    <jar destfile="${temp.jar.path.shell-server-api.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${shell-server-api.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.shell-server-api.jar}" tofile="${artifact.temp.output.shell-server-api:jar}/shell-server-api.jar"/>
+  </target>
+  
+  <target name="artifact.shell-server-impl:jar" depends="init.artifacts, compile.module.shell-server-impl" description="Build &#39;shell-server-impl:jar&#39; artifact">
+    <property name="artifact.temp.output.shell-server-impl:jar" value="${artifacts.temp.dir}/shell_server_impl_jar"/>
+    <mkdir dir="${artifact.temp.output.shell-server-impl:jar}"/>
+    <jar destfile="${temp.jar.path.shell-server-impl.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${shell-server-impl.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.shell-server-impl.jar}" tofile="${artifact.temp.output.shell-server-impl:jar}/shell-server-impl.jar"/>
+  </target>
+  
+  <target name="artifact.statistics-api:jar" depends="init.artifacts, compile.module.statistics-api" description="Build &#39;statistics-api:jar&#39; artifact">
+    <property name="artifact.temp.output.statistics-api:jar" value="${artifacts.temp.dir}/statistics_api_jar"/>
+    <mkdir dir="${artifact.temp.output.statistics-api:jar}"/>
+    <jar destfile="${temp.jar.path.statistics-api.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${statistics-api.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.statistics-api.jar}" tofile="${artifact.temp.output.statistics-api:jar}/statistics-api.jar"/>
+  </target>
+  
+  <target name="artifact.statistics-impl:jar" depends="init.artifacts, compile.module.statistics-impl" description="Build &#39;statistics-impl:jar&#39; artifact">
+    <property name="artifact.temp.output.statistics-impl:jar" value="${artifacts.temp.dir}/statistics_impl_jar"/>
+    <mkdir dir="${artifact.temp.output.statistics-impl:jar}"/>
+    <jar destfile="${temp.jar.path.statistics-impl.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${statistics-impl.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.statistics-impl.jar}" tofile="${artifact.temp.output.statistics-impl:jar}/statistics-impl.jar"/>
+  </target>
+  
+  <target name="artifact.stream:jar" depends="init.artifacts, compile.module.stream" description="Build &#39;stream:jar&#39; artifact">
+    <property name="artifact.temp.output.stream:jar" value="${artifacts.temp.dir}/stream_jar"/>
+    <mkdir dir="${artifact.temp.output.stream:jar}"/>
+    <jar destfile="${temp.jar.path.stream.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${stream.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.stream.jar}" tofile="${artifact.temp.output.stream:jar}/stream.jar"/>
+  </target>
+  
+  <target name="artifact.tcap-api:jar" depends="init.artifacts, compile.module.tcap-api" description="Build &#39;tcap-api:jar&#39; artifact">
+    <property name="artifact.temp.output.tcap-api:jar" value="${artifacts.temp.dir}/tcap_api_jar"/>
+    <mkdir dir="${artifact.temp.output.tcap-api:jar}"/>
+    <jar destfile="${temp.jar.path.tcap-api.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${tcap-api.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.tcap-api.jar}" tofile="${artifact.temp.output.tcap-api:jar}/tcap-api.jar"/>
+  </target>
+  
+  <target name="artifact.tcap-impl:jar" depends="init.artifacts, compile.module.tcap-impl" description="Build &#39;tcap-impl:jar&#39; artifact">
+    <property name="artifact.temp.output.tcap-impl:jar" value="${artifacts.temp.dir}/tcap_impl_jar"/>
+    <mkdir dir="${artifact.temp.output.tcap-impl:jar}"/>
+    <jar destfile="${temp.jar.path.tcap-impl.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${tcap-impl.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.tcap-impl.jar}" tofile="${artifact.temp.output.tcap-impl:jar}/tcap-impl.jar"/>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.asn-impl:jar, artifact.bootstrap:jar, artifact.commons:jar, artifact.congestion:jar, artifact.isup-api:jar, artifact.isup-impl:jar, artifact.m3ua-api:jar, artifact.m3ua-impl:jar, artifact.map-api:jar, artifact.map-impl:jar, artifact.mtp-api:jar, artifact.mtp-impl:jar, artifact.sccp-api:jar, artifact.sccp-impl:jar, artifact.scheduler:jar, artifact.sctp-api:jar, artifact.sctp-impl:jar, artifact.shell-server-api:jar, artifact.shell-server-impl:jar, artifact.statistics-api:jar, artifact.statistics-impl:jar, artifact.stream:jar, artifact.tcap-api:jar, artifact.tcap-impl:jar" description="Build all artifacts">
+    <mkdir dir="${artifact.output.asn-impl:jar}"/>
+    <copy todir="${artifact.output.asn-impl:jar}">
+      <fileset dir="${artifact.temp.output.asn-impl:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.bootstrap:jar}"/>
+    <copy todir="${artifact.output.bootstrap:jar}">
+      <fileset dir="${artifact.temp.output.bootstrap:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.commons:jar}"/>
+    <copy todir="${artifact.output.commons:jar}">
+      <fileset dir="${artifact.temp.output.commons:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.congestion:jar}"/>
+    <copy todir="${artifact.output.congestion:jar}">
+      <fileset dir="${artifact.temp.output.congestion:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.isup-api:jar}"/>
+    <copy todir="${artifact.output.isup-api:jar}">
+      <fileset dir="${artifact.temp.output.isup-api:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.isup-impl:jar}"/>
+    <copy todir="${artifact.output.isup-impl:jar}">
+      <fileset dir="${artifact.temp.output.isup-impl:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.m3ua-api:jar}"/>
+    <copy todir="${artifact.output.m3ua-api:jar}">
+      <fileset dir="${artifact.temp.output.m3ua-api:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.m3ua-impl:jar}"/>
+    <copy todir="${artifact.output.m3ua-impl:jar}">
+      <fileset dir="${artifact.temp.output.m3ua-impl:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.map-api:jar}"/>
+    <copy todir="${artifact.output.map-api:jar}">
+      <fileset dir="${artifact.temp.output.map-api:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.map-impl:jar}"/>
+    <copy todir="${artifact.output.map-impl:jar}">
+      <fileset dir="${artifact.temp.output.map-impl:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.mtp-api:jar}"/>
+    <copy todir="${artifact.output.mtp-api:jar}">
+      <fileset dir="${artifact.temp.output.mtp-api:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.mtp-impl:jar}"/>
+    <copy todir="${artifact.output.mtp-impl:jar}">
+      <fileset dir="${artifact.temp.output.mtp-impl:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.sccp-api:jar}"/>
+    <copy todir="${artifact.output.sccp-api:jar}">
+      <fileset dir="${artifact.temp.output.sccp-api:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.sccp-impl:jar}"/>
+    <copy todir="${artifact.output.sccp-impl:jar}">
+      <fileset dir="${artifact.temp.output.sccp-impl:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.scheduler:jar}"/>
+    <copy todir="${artifact.output.scheduler:jar}">
+      <fileset dir="${artifact.temp.output.scheduler:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.sctp-api:jar}"/>
+    <copy todir="${artifact.output.sctp-api:jar}">
+      <fileset dir="${artifact.temp.output.sctp-api:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.sctp-impl:jar}"/>
+    <copy todir="${artifact.output.sctp-impl:jar}">
+      <fileset dir="${artifact.temp.output.sctp-impl:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.shell-server-api:jar}"/>
+    <copy todir="${artifact.output.shell-server-api:jar}">
+      <fileset dir="${artifact.temp.output.shell-server-api:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.shell-server-impl:jar}"/>
+    <copy todir="${artifact.output.shell-server-impl:jar}">
+      <fileset dir="${artifact.temp.output.shell-server-impl:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.statistics-api:jar}"/>
+    <copy todir="${artifact.output.statistics-api:jar}">
+      <fileset dir="${artifact.temp.output.statistics-api:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.statistics-impl:jar}"/>
+    <copy todir="${artifact.output.statistics-impl:jar}">
+      <fileset dir="${artifact.temp.output.statistics-impl:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.stream:jar}"/>
+    <copy todir="${artifact.output.stream:jar}">
+      <fileset dir="${artifact.temp.output.stream:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.tcap-api:jar}"/>
+    <copy todir="${artifact.output.tcap-api:jar}">
+      <fileset dir="${artifact.temp.output.tcap-api:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.tcap-impl:jar}"/>
+    <copy todir="${artifact.output.tcap-impl:jar}">
+      <fileset dir="${artifact.temp.output.tcap-impl:jar}"/>
+    </copy>
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>

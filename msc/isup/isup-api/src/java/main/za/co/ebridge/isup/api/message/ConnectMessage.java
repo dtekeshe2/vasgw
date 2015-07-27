@@ -1,0 +1,287 @@
+package za.co.ebridge.isup.api.message;
+
+import za.co.ebridge.isup.api.message.parameter.AccessDeliveryInformation;
+import za.co.ebridge.isup.api.message.parameter.ApplicationTransport;
+import za.co.ebridge.isup.api.message.parameter.BackwardCallIndicators;
+import za.co.ebridge.isup.api.message.parameter.BackwardGVNS;
+import za.co.ebridge.isup.api.message.parameter.CallHistoryInformation;
+import za.co.ebridge.isup.api.message.parameter.CallReference;
+import za.co.ebridge.isup.api.message.parameter.ConferenceTreatmentIndicators;
+import za.co.ebridge.isup.api.message.parameter.ConnectedNumber;
+import za.co.ebridge.isup.api.message.parameter.EchoControlInformation;
+import za.co.ebridge.isup.api.message.parameter.GenericNotificationIndicator;
+import za.co.ebridge.isup.api.message.parameter.GenericNumber;
+import za.co.ebridge.isup.api.message.parameter.HTRInformation;
+import za.co.ebridge.isup.api.message.parameter.NetworkSpecificFacility;
+import za.co.ebridge.isup.api.message.parameter.OptionalBackwardCallIndicators;
+import za.co.ebridge.isup.api.message.parameter.ParameterCompatibilityInformation;
+import za.co.ebridge.isup.api.message.parameter.PivotRoutingBackwardInformation;
+import za.co.ebridge.isup.api.message.parameter.RedirectStatus;
+import za.co.ebridge.isup.api.message.parameter.RedirectionNumberRestriction;
+import za.co.ebridge.isup.api.message.parameter.RemoteOperations;
+import za.co.ebridge.isup.api.message.parameter.ServiceActivation;
+import za.co.ebridge.isup.api.message.parameter.TransmissionMediumUsed;
+import za.co.ebridge.isup.api.message.parameter.UserToUserIndicators;
+import za.co.ebridge.isup.api.message.parameter.UserToUserInformation;
+import za.co.ebridge.isup.api.message.parameter.accessTransport.AccessTransport;
+
+/**
+ * <TABLE id="Table10" style="FONT-SIZE: 9pt; WIDTH: 584px; HEIGHT: 72px; TEXT-ALIGN: center" cellSpacing="1"
+ * cellPadding="1" width="584" align="center" border="1">
+ * <TR>
+ * <TD style="FONT-WEIGHT: bold; WIDTH: 328px; COLOR: teal; HEIGHT: 28px; TEXT-ALIGN: center" align="center"
+ * colSpan="3">
+ * <p/>
+ * <TABLE id="Table42" style="WIDTH: 575px; HEIGHT: 49px" cellSpacing="1" cellPadding="1" width="575" border="0">
+ * <TR>
+ * <TD style="FONT-WEIGHT: bold; FONT-SIZE: 10pt; COLOR: teal; HEIGHT: 28px; TEXT-ALIGN: center" colSpan="3">
+ * Connect Message (CON)</TD>
+ * </TR>
+ * <TR>
+ * <TD style="FONT-SIZE: 9pt; COLOR: navy" colSpan="3">
+ * <p/>
+ * CON is sent in the backward direction indicating that all the address signals required for routing the call to the
+ * called
+ * party have been received and that the call has been answered.
+ * </P>
+ * </TD>
+ * <p/>
+ * </TR>
+ * </TABLE>
+ * </TD>
+ * </TR>
+ * <TR>
+ * <TD style="FONT-WEIGHT: bold; WIDTH: 283px; HEIGHT: 30px; TEXT-ALIGN: center">
+ * Parameter</TD>
+ * <TD style="FONT-WEIGHT: bold; WIDTH: 145px; HEIGHT: 30px">Type</TD>
+ * <TD style="FONT-WEIGHT: bold; HEIGHT: 30px">Length (octet)</TD>
+ * <p/>
+ * </TR>
+ * <TR>
+ * <TD style="WIDTH: 283px; TEXT-ALIGN: left">Message type</TD>
+ * <TD style="WIDTH: 145px">F</TD>
+ * <TD>1</TD>
+ * </TR>
+ * <TR>
+ * <p/>
+ * <TD style="WIDTH: 283px; TEXT-ALIGN: left">Backward Call Indicators</TD>
+ * <TD style="WIDTH: 145px">O</TD>
+ * <TD>2</TD>
+ * </TR>
+ * <TR>
+ * <TD style="WIDTH: 283px; TEXT-ALIGN: left">Optional Backward Call Indicators</TD>
+ * <TD style="WIDTH: 145px">O</TD>
+ * <p/>
+ * <TD>3</TD>
+ * </TR>
+ * <TR>
+ * <TD style="WIDTH: 283px; TEXT-ALIGN: left">Call Reference</TD>
+ * <TD style="WIDTH: 145px">O</TD>
+ * <TD>7</TD>
+ * </TR>
+ * <p/>
+ * <TR>
+ * <TD style="WIDTH: 283px; TEXT-ALIGN: left">User to User Indicators</TD>
+ * <TD style="WIDTH: 145px">O</TD>
+ * <TD>3</TD>
+ * </TR>
+ * <TR>
+ * <TD style="WIDTH: 283px; TEXT-ALIGN: left">User to User Information</TD>
+ * <p/>
+ * <TD style="WIDTH: 145px">O</TD>
+ * <TD>3-131</TD>
+ * </TR>
+ * <TR>
+ * <TD style="WIDTH: 283px; TEXT-ALIGN: left">Connected Number</TD>
+ * <TD style="WIDTH: 145px">O</TD>
+ * <TD>4-12</TD>
+ * <p/>
+ * </TR>
+ * <TR>
+ * <TD style="WIDTH: 283px; TEXT-ALIGN: left">Access Transport</TD>
+ * <TD style="WIDTH: 145px">O</TD>
+ * <TD>3-?</TD>
+ * </TR>
+ * <TR>
+ * <p/>
+ * <TD style="WIDTH: 283px; TEXT-ALIGN: left">Generic Notification Indicator</TD>
+ * <TD style="WIDTH: 145px">O</TD>
+ * <TD>3</TD>
+ * </TR>
+ * <TR>
+ * <TD style="WIDTH: 283px; TEXT-ALIGN: left">Call History Information</TD>
+ * <TD style="WIDTH: 145px">O</TD>
+ * <p/>
+ * <TD>3</TD>
+ * </TR>
+ * <TR>
+ * <TD style="WIDTH: 283px; TEXT-ALIGN: left">Transmission Medium Used</TD>
+ * <TD style="WIDTH: 145px">O</TD>
+ * <TD>3</TD>
+ * </TR>
+ * <p/>
+ * <TR>
+ * <TD style="WIDTH: 283px; TEXT-ALIGN: left">Generic Number</TD>
+ * <TD style="WIDTH: 145px">O</TD>
+ * <TD>4-12</TD>
+ * </TR>
+ * <TR>
+ * <TD style="WIDTH: 283px; TEXT-ALIGN: left">Echo Control Information</TD>
+ * <p/>
+ * <TD style="WIDTH: 145px">O</TD>
+ * <TD>3</TD>
+ * </TR>
+ * <TR>
+ * <TD style="WIDTH: 283px; TEXT-ALIGN: left">Access Delivery Information</TD>
+ * <TD style="WIDTH: 145px">O</TD>
+ * <TD>3</TD>
+ * <p/>
+ * </TR>
+ * <TR>
+ * <TD style="WIDTH: 283px; TEXT-ALIGN: left">Redirection Number</TD>
+ * <TD style="WIDTH: 145px">O</TD>
+ * <TD>5-12</TD>
+ * </TR>
+ * <TR>
+ * <p/>
+ * <TD style="WIDTH: 283px; TEXT-ALIGN: left">Parameter Compatibility Information</TD>
+ * <TD style="WIDTH: 145px">O</TD>
+ * <TD>4-?</TD>
+ * </TR>
+ * <TR>
+ * <TD style="WIDTH: 283px; TEXT-ALIGN: left">Network Specific Facility</TD>
+ * <TD style="WIDTH: 145px">O</TD>
+ * <p/>
+ * <TD>4-?</TD>
+ * </TR>
+ * <TR>
+ * <TD style="WIDTH: 283px; TEXT-ALIGN: left">Remote Operations</TD>
+ * <TD style="WIDTH: 145px">O</TD>
+ * <TD>?</TD>
+ * </TR>
+ * <p/>
+ * <TR>
+ * <TD style="WIDTH: 283px; TEXT-ALIGN: left">Service Activation</TD>
+ * <TD style="WIDTH: 145px">O</TD>
+ * <TD>3-?</TD>
+ * </TR>
+ * <TR>
+ * <TD style="WIDTH: 283px; TEXT-ALIGN: left">Redirection Number Restriction</TD>
+ * <p/>
+ * <TD style="WIDTH: 145px">O</TD>
+ * <TD>3</TD>
+ * </TR>
+ * <TR>
+ * <TD style="WIDTH: 283px; TEXT-ALIGN: left">End of Optional Parameters</TD>
+ * <TD style="WIDTH: 145px">O</TD>
+ * <TD>1</TD>
+ * <p/>
+ * </TR>
+ * </TABLE>
+ */
+public interface ConnectMessage
+        extends ISUPMessage
+{
+    /**
+     * Connect Message, Q.763 reference table 27 <br>
+     * {@link ConnectMessage}
+     */
+    int MESSAGE_CODE = 0x07;
+
+    void setBackwardCallIndicators(BackwardCallIndicators indicators);
+
+    BackwardCallIndicators getBackwardCallIndicators();
+
+    void setOptionalBackwardCallIndicators(OptionalBackwardCallIndicators value);
+
+    OptionalBackwardCallIndicators getOptionalBackwardCallIndicators();
+
+    void setConnectedNumber(ConnectedNumber value);
+
+    ConnectedNumber getConnectedNumber();
+
+    void setBackwardGVNS(BackwardGVNS value);
+
+    BackwardGVNS getBackwardGVNS();
+
+    void setCallReference(CallReference value);
+
+    CallReference getCallReference();
+
+    void setUserToUserIndicators(UserToUserIndicators value);
+
+    UserToUserIndicators getUserToUserIndicators();
+
+    void setUserToUserInformation(UserToUserInformation value);
+
+    UserToUserInformation getUserToUserInformation();
+
+    void setAccessTransport(AccessTransport value);
+
+    AccessTransport getAccessTransport();
+
+    void setNetworkSpecificFacility(NetworkSpecificFacility value);
+
+    NetworkSpecificFacility getNetworkSpecificFacility();
+
+    void setGenericNotificationIndicator(GenericNotificationIndicator value);
+
+    GenericNotificationIndicator getGenericNotificationIndicator();
+
+    void setRemoteOperations(RemoteOperations value);
+
+    RemoteOperations getRemoteOperations();
+
+    void setTransmissionMediumUsed(TransmissionMediumUsed value);
+
+    TransmissionMediumUsed getTransmissionMediumUsed();
+
+    void setEchoControlInformation(EchoControlInformation value);
+
+    EchoControlInformation getEchoControlInformation();
+
+    void setAccessDeliveryInformation(AccessDeliveryInformation value);
+
+    AccessDeliveryInformation getAccessDeliveryInformation();
+
+    void setCallHistoryInformation(CallHistoryInformation value);
+
+    CallHistoryInformation getCallHistoryInformation();
+
+    void setParameterCompatibilityInformation(ParameterCompatibilityInformation value);
+
+    ParameterCompatibilityInformation getParameterCompatibilityInformation();
+
+    void setServiceActivation(ServiceActivation value);
+
+    ServiceActivation getServiceActivation();
+
+    void setGenericNumber(GenericNumber value);
+
+    GenericNumber getGenericNumber();
+
+    RedirectionNumberRestriction getRedirectionNumberRestriction();
+
+    void setRedirectionNumberRestriction(RedirectionNumberRestriction value);
+
+    void setConferenceTreatmentIndicators(ConferenceTreatmentIndicators value);
+
+    ConferenceTreatmentIndicators getConferenceTreatmentIndicators();
+
+    void setApplicationTransportParameter(ApplicationTransport value);
+
+    ApplicationTransport getApplicationTransportParameter();
+
+    void setHTRInformation(HTRInformation value);
+
+    HTRInformation getHTRInformation();
+
+    void setPivotRoutingBackwardInformation(PivotRoutingBackwardInformation value);
+
+    PivotRoutingBackwardInformation getPivotRoutingBackwardInformation();
+
+    void setRedirectStatus(RedirectStatus value);
+
+    RedirectStatus getRedirectStatus();
+
+}

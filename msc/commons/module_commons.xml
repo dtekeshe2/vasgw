@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_commons" default="compile.module.commons">
+  <dirname property="module.commons.basedir" file="${ant.file.module_commons}"/>
+  
+  <property name="module.jdk.home.commons" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.commons" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.commons" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.commons" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
+  
+  <property name="commons.output.dir" value="${module.commons.basedir}/../out/production/commons"/>
+  <property name="commons.testoutput.dir" value="${module.commons.basedir}/../out/test/commons"/>
+  
+  <path id="commons.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="commons.module.production.classpath">
+    <path refid="${module.jdk.classpath.commons}"/>
+    <fileset dir="${basedir}/repository/commons/dbcp">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <fileset dir="${basedir}/repository/commons/pool">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <pathelement location="${basedir}/repository/mysql/mysql-connector-java-5.1.25-bin.jar"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  <path id="commons.runtime.production.module.classpath">
+    <pathelement location="${commons.output.dir}"/>
+    <fileset dir="${basedir}/repository/commons/dbcp">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <fileset dir="${basedir}/repository/commons/pool">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <pathelement location="${basedir}/repository/mysql/mysql-connector-java-5.1.25-bin.jar"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  <path id="commons.module.classpath">
+    <path refid="${module.jdk.classpath.commons}"/>
+    <pathelement location="${commons.output.dir}"/>
+    <fileset dir="${basedir}/repository/commons/dbcp">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <fileset dir="${basedir}/repository/commons/pool">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <pathelement location="${basedir}/repository/mysql/mysql-connector-java-5.1.25-bin.jar"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  <path id="commons.runtime.module.classpath">
+    <pathelement location="${commons.testoutput.dir}"/>
+    <pathelement location="${commons.output.dir}"/>
+    <fileset dir="${basedir}/repository/commons/dbcp">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <fileset dir="${basedir}/repository/commons/pool">
+      <patternset refid="library.patterns"/>
+    </fileset>
+    <pathelement location="${basedir}/repository/mysql/mysql-connector-java-5.1.25-bin.jar"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.commons">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.commons">
+    <patternset refid="excluded.from.module.commons"/>
+  </patternset>
+  
+  <path id="commons.module.sourcepath">
+    <dirset dir="${module.commons.basedir}">
+      <include name="src/java/main"/>
+    </dirset>
+  </path>
+  
+  <path id="commons.module.test.sourcepath">
+    <dirset dir="${module.commons.basedir}">
+      <include name="src/java/test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.commons" depends="compile.module.commons.production,compile.module.commons.tests" description="Compile module commons"/>
+  
+  <target name="compile.module.commons.production" depends="register.custom.compilers" description="Compile module commons; production classes">
+    <mkdir dir="${commons.output.dir}"/>
+    <javac2 destdir="${commons.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.commons}/javac">
+      <compilerarg line="${compiler.args.commons}"/>
+      <bootclasspath refid="commons.module.bootclasspath"/>
+      <classpath refid="commons.module.production.classpath"/>
+      <src refid="commons.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.commons"/>
+    </javac2>
+    
+    <copy todir="${commons.output.dir}">
+      <fileset dir="${module.commons.basedir}/src/java/main">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.commons.tests" depends="register.custom.compilers,compile.module.commons.production" description="compile module commons; test classes" unless="skip.tests">
+    <mkdir dir="${commons.testoutput.dir}"/>
+    <javac2 destdir="${commons.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.commons}/javac">
+      <compilerarg line="${compiler.args.commons}"/>
+      <bootclasspath refid="commons.module.bootclasspath"/>
+      <classpath refid="commons.module.classpath"/>
+      <src refid="commons.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.commons"/>
+    </javac2>
+    
+    <copy todir="${commons.testoutput.dir}">
+      <fileset dir="${module.commons.basedir}/src/java/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.commons" description="cleanup module">
+    <delete dir="${commons.output.dir}"/>
+    <delete dir="${commons.testoutput.dir}"/>
+  </target>
+</project>

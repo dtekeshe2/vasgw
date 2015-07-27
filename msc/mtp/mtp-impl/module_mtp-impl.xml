@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_mtp-impl" default="compile.module.mtp-impl">
+  <dirname property="module.mtp-impl.basedir" file="${ant.file.module_mtp-impl}"/>
+  
+  <property name="module.jdk.home.mtp-impl" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.mtp-impl" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.mtp-impl" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.mtp-impl" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
+  
+  <property name="mtp-impl.output.dir" value="${module.mtp-impl.basedir}/../../out/production/mtp-impl"/>
+  <property name="mtp-impl.testoutput.dir" value="${module.mtp-impl.basedir}/../../out/test/mtp-impl"/>
+  
+  <path id="mtp-impl.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="mtp-impl.module.production.classpath">
+    <path refid="${module.jdk.classpath.mtp-impl}"/>
+    <pathelement location="${basedir}/repository/commons/log4j-1.2.16.jar"/>
+    <pathelement location="${mtp-api.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <pathelement location="${scheduler.output.dir}"/>
+    <path refid="library.rt.classpath"/>
+    <pathelement location="${stream.output.dir}"/>
+  </path>
+  
+  <path id="mtp-impl.runtime.production.module.classpath">
+    <pathelement location="${mtp-impl.output.dir}"/>
+    <pathelement location="${basedir}/repository/commons/log4j-1.2.16.jar"/>
+    <path refid="mtp-api.runtime.production.module.classpath"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <path refid="scheduler.runtime.production.module.classpath"/>
+    <path refid="library.rt.classpath"/>
+    <path refid="stream.runtime.production.module.classpath"/>
+  </path>
+  
+  <path id="mtp-impl.module.classpath">
+    <path refid="${module.jdk.classpath.mtp-impl}"/>
+    <pathelement location="${mtp-impl.output.dir}"/>
+    <pathelement location="${basedir}/repository/commons/log4j-1.2.16.jar"/>
+    <pathelement location="${mtp-api.testoutput.dir}"/>
+    <pathelement location="${mtp-api.output.dir}"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <pathelement location="${scheduler.testoutput.dir}"/>
+    <pathelement location="${scheduler.output.dir}"/>
+    <path refid="library.rt.classpath"/>
+    <pathelement location="${stream.testoutput.dir}"/>
+    <pathelement location="${stream.output.dir}"/>
+  </path>
+  
+  <path id="mtp-impl.runtime.module.classpath">
+    <pathelement location="${mtp-impl.testoutput.dir}"/>
+    <pathelement location="${mtp-impl.output.dir}"/>
+    <pathelement location="${basedir}/repository/commons/log4j-1.2.16.jar"/>
+    <path refid="mtp-api.runtime.module.classpath"/>
+    <path refid="library.javolution-core-java-6.0.1-20130819.063134-2.classpath"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+    <path refid="scheduler.runtime.module.classpath"/>
+    <path refid="library.rt.classpath"/>
+    <path refid="stream.runtime.module.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.mtp-impl">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.mtp-impl">
+    <patternset refid="excluded.from.module.mtp-impl"/>
+  </patternset>
+  
+  <path id="mtp-impl.module.sourcepath">
+    <dirset dir="${module.mtp-impl.basedir}">
+      <include name="src/java/main"/>
+    </dirset>
+  </path>
+  
+  <path id="mtp-impl.module.test.sourcepath">
+    <dirset dir="${module.mtp-impl.basedir}">
+      <include name="src/java/test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.mtp-impl" depends="compile.module.mtp-impl.production,compile.module.mtp-impl.tests" description="Compile module mtp-impl"/>
+  
+  <target name="compile.module.mtp-impl.production" depends="register.custom.compilers,compile.module.mtp-api,compile.module.scheduler,compile.module.stream" description="Compile module mtp-impl; production classes">
+    <mkdir dir="${mtp-impl.output.dir}"/>
+    <javac2 destdir="${mtp-impl.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.mtp-impl}/javac">
+      <compilerarg line="${compiler.args.mtp-impl}"/>
+      <bootclasspath refid="mtp-impl.module.bootclasspath"/>
+      <classpath refid="mtp-impl.module.production.classpath"/>
+      <src refid="mtp-impl.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.mtp-impl"/>
+    </javac2>
+    
+    <copy todir="${mtp-impl.output.dir}">
+      <fileset dir="${module.mtp-impl.basedir}/src/java/main">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.mtp-impl.tests" depends="register.custom.compilers,compile.module.mtp-impl.production" description="compile module mtp-impl; test classes" unless="skip.tests">
+    <mkdir dir="${mtp-impl.testoutput.dir}"/>
+    <javac2 destdir="${mtp-impl.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.mtp-impl}/javac">
+      <compilerarg line="${compiler.args.mtp-impl}"/>
+      <bootclasspath refid="mtp-impl.module.bootclasspath"/>
+      <classpath refid="mtp-impl.module.classpath"/>
+      <src refid="mtp-impl.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.mtp-impl"/>
+    </javac2>
+    
+    <copy todir="${mtp-impl.testoutput.dir}">
+      <fileset dir="${module.mtp-impl.basedir}/src/java/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.mtp-impl" description="cleanup module">
+    <delete dir="${mtp-impl.output.dir}"/>
+    <delete dir="${mtp-impl.testoutput.dir}"/>
+  </target>
+</project>

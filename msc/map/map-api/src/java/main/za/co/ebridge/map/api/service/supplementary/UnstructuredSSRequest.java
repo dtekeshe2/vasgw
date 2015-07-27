@@ -1,0 +1,62 @@
+/* eBridge SS7 */
+
+package za.co.ebridge.map.api.service.supplementary;
+
+import za.co.ebridge.map.api.datacoding.CBSDataCodingScheme;
+import za.co.ebridge.map.api.primitives.AlertingPattern;
+import za.co.ebridge.map.api.primitives.ISDNAddressString;
+import za.co.ebridge.map.api.primitives.USSDString;
+
+/**
+ *
+ MAP V2:
+ *
+ * unstructuredSS-Request OPERATION ::= { --Timer ml ARGUMENT USSD-Arg RESULT USSD-Res -- optional ERRORS { systemFailure |
+ * dataMissing | unexpectedDataValue | absentSubscriber | illegalSubscriber | illegalEquipment | unknownAlphabet | ussd-Busy}
+ * CODE local:60 }
+ *
+ * This service is used between the HLR and the VLR and between the VLR and the MSC when the invoking entity requires
+ * information from the mobile user, in connection with unstructured supplementary service handling.
+ *
+ * @author amit bhayani
+ *
+ */
+public interface UnstructuredSSRequest extends SupplementaryMessage {
+
+    /**
+     * This parameter contains the information of the alphabet and the language used for the unstructured information in an
+     * Unstructured Supplementary Service Data operation. The coding of this parameter is according to the Cell Broadcast Data
+     * Coding Scheme as specified in GSM 03.38.
+     *
+     * @return
+     */
+    CBSDataCodingScheme getDataCodingScheme();
+
+    /**
+     * <p>
+     * This parameter contains a string of unstructured information in an Unstructured Supplementary Service Data operation. The
+     * string is sent either by the mobile user or the network. The contents of a string sent by the MS are interpreted by the
+     * network as specified in GSM 02.90.
+     * </p>
+     * <br/>
+     * <p>
+     * USSD String is OCTET STRING (SIZE (1..160))
+     * </p>
+     *
+     * <br/>
+     *
+     * <p>
+     * The structure of the contents of the USSD-String is dependent -- on the USSD-DataCodingScheme as described in TS GSM
+     * 03.38.
+     * </p>
+     *
+     *
+     *
+     * @return
+     */
+    USSDString getUSSDString();
+
+    ISDNAddressString getMSISDNAddressString();
+
+    AlertingPattern getAlertingPattern();
+}

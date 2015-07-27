@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_congestion" default="compile.module.congestion">
+  <dirname property="module.congestion.basedir" file="${ant.file.module_congestion}"/>
+  
+  <property name="module.jdk.home.congestion" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.congestion" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.congestion" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.congestion" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
+  
+  <property name="congestion.output.dir" value="${module.congestion.basedir}/../out/production/congestion"/>
+  <property name="congestion.testoutput.dir" value="${module.congestion.basedir}/../out/test/congestion"/>
+  
+  <path id="congestion.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="congestion.module.production.classpath">
+    <path refid="${module.jdk.classpath.congestion}"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  <path id="congestion.runtime.production.module.classpath">
+    <pathelement location="${congestion.output.dir}"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  <path id="congestion.module.classpath">
+    <path refid="${module.jdk.classpath.congestion}"/>
+    <pathelement location="${congestion.output.dir}"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  <path id="congestion.runtime.module.classpath">
+    <pathelement location="${congestion.testoutput.dir}"/>
+    <pathelement location="${congestion.output.dir}"/>
+    <path refid="library.log4j-1.2.16.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.congestion">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.congestion">
+    <patternset refid="excluded.from.module.congestion"/>
+  </patternset>
+  
+  <path id="congestion.module.sourcepath">
+    <dirset dir="${module.congestion.basedir}">
+      <include name="src/java/main"/>
+    </dirset>
+  </path>
+  
+  <path id="congestion.module.test.sourcepath">
+    <dirset dir="${module.congestion.basedir}">
+      <include name="src/java/test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.congestion" depends="compile.module.congestion.production,compile.module.congestion.tests" description="Compile module congestion"/>
+  
+  <target name="compile.module.congestion.production" depends="register.custom.compilers" description="Compile module congestion; production classes">
+    <mkdir dir="${congestion.output.dir}"/>
+    <javac2 destdir="${congestion.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.congestion}/javac">
+      <compilerarg line="${compiler.args.congestion}"/>
+      <bootclasspath refid="congestion.module.bootclasspath"/>
+      <classpath refid="congestion.module.production.classpath"/>
+      <src refid="congestion.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.congestion"/>
+    </javac2>
+    
+    <copy todir="${congestion.output.dir}">
+      <fileset dir="${module.congestion.basedir}/src/java/main">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.congestion.tests" depends="register.custom.compilers,compile.module.congestion.production" description="compile module congestion; test classes" unless="skip.tests">
+    <mkdir dir="${congestion.testoutput.dir}"/>
+    <javac2 destdir="${congestion.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.congestion}/javac">
+      <compilerarg line="${compiler.args.congestion}"/>
+      <bootclasspath refid="congestion.module.bootclasspath"/>
+      <classpath refid="congestion.module.classpath"/>
+      <src refid="congestion.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.congestion"/>
+    </javac2>
+    
+    <copy todir="${congestion.testoutput.dir}">
+      <fileset dir="${module.congestion.basedir}/src/java/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.congestion" description="cleanup module">
+    <delete dir="${congestion.output.dir}"/>
+    <delete dir="${congestion.testoutput.dir}"/>
+  </target>
+</project>
