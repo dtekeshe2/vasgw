@@ -1,0 +1,1 @@
+java -Dlog4j.configuration=log4j.properties -cp /home/vas/conf/:/home/vas/lib/billing/ebridge-web-service-client-1.0.jar:"/home/vas/lib/ext/axis14/*":"/home/vas/lib/ext/commons/*" com.ebridge.webservice.client.ServiceSoapFactoryTest 10

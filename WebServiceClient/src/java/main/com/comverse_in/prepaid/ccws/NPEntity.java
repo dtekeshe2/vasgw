@@ -1,0 +1,157 @@
+/**
+ * NPEntity.java
+ *
+ * This file was auto-generated from WSDL
+ * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
+ */
+
+package com.comverse_in.prepaid.ccws;
+
+public class NPEntity  implements java.io.Serializable {
+    private String originalNumber;
+
+    private String routedNumber;
+
+    public NPEntity() {
+    }
+
+    public NPEntity(
+           String originalNumber,
+           String routedNumber) {
+           this.originalNumber = originalNumber;
+           this.routedNumber = routedNumber;
+    }
+
+
+    /**
+     * Gets the originalNumber value for this NPEntity.
+     * 
+     * @return originalNumber
+     */
+    public String getOriginalNumber() {
+        return originalNumber;
+    }
+
+
+    /**
+     * Sets the originalNumber value for this NPEntity.
+     * 
+     * @param originalNumber
+     */
+    public void setOriginalNumber(String originalNumber) {
+        this.originalNumber = originalNumber;
+    }
+
+
+    /**
+     * Gets the routedNumber value for this NPEntity.
+     * 
+     * @return routedNumber
+     */
+    public String getRoutedNumber() {
+        return routedNumber;
+    }
+
+
+    /**
+     * Sets the routedNumber value for this NPEntity.
+     * 
+     * @param routedNumber
+     */
+    public void setRoutedNumber(String routedNumber) {
+        this.routedNumber = routedNumber;
+    }
+
+    private Object __equalsCalc = null;
+    public synchronized boolean equals(Object obj) {
+        if (!(obj instanceof NPEntity)) return false;
+        NPEntity other = (NPEntity) obj;
+        if (obj == null) return false;
+        if (this == obj) return true;
+        if (__equalsCalc != null) {
+            return (__equalsCalc == obj);
+        }
+        __equalsCalc = obj;
+        boolean _equals;
+        _equals = true && 
+            ((this.originalNumber==null && other.getOriginalNumber()==null) || 
+             (this.originalNumber!=null &&
+              this.originalNumber.equals(other.getOriginalNumber()))) &&
+            ((this.routedNumber==null && other.getRoutedNumber()==null) || 
+             (this.routedNumber!=null &&
+              this.routedNumber.equals(other.getRoutedNumber())));
+        __equalsCalc = null;
+        return _equals;
+    }
+
+    private boolean __hashCodeCalc = false;
+    public synchronized int hashCode() {
+        if (__hashCodeCalc) {
+            return 0;
+        }
+        __hashCodeCalc = true;
+        int _hashCode = 1;
+        if (getOriginalNumber() != null) {
+            _hashCode += getOriginalNumber().hashCode();
+        }
+        if (getRoutedNumber() != null) {
+            _hashCode += getRoutedNumber().hashCode();
+        }
+        __hashCodeCalc = false;
+        return _hashCode;
+    }
+
+    // Type metadata
+    private static org.apache.axis.description.TypeDesc typeDesc =
+        new org.apache.axis.description.TypeDesc(NPEntity.class, true);
+
+    static {
+        typeDesc.setXmlType(new javax.xml.namespace.QName("http://comverse-in.com/prepaid/ccws", "NPEntity"));
+        org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("originalNumber");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://comverse-in.com/prepaid/ccws", "OriginalNumber"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("routedNumber");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://comverse-in.com/prepaid/ccws", "RoutedNumber"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+    }
+
+    /**
+     * Return type metadata object
+     */
+    public static org.apache.axis.description.TypeDesc getTypeDesc() {
+        return typeDesc;
+    }
+
+    /**
+     * Get Custom Serializer
+     */
+    public static org.apache.axis.encoding.Serializer getSerializer(
+           String mechType,
+           Class _javaType,
+           javax.xml.namespace.QName _xmlType) {
+        return 
+          new  org.apache.axis.encoding.ser.BeanSerializer(
+            _javaType, _xmlType, typeDesc);
+    }
+
+    /**
+     * Get Custom Deserializer
+     */
+    public static org.apache.axis.encoding.Deserializer getDeserializer(
+           String mechType,
+           Class _javaType,
+           javax.xml.namespace.QName _xmlType) {
+        return 
+          new  org.apache.axis.encoding.ser.BeanDeserializer(
+            _javaType, _xmlType, typeDesc);
+    }
+
+}

@@ -1,0 +1,1595 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:apachesoap="http://xml.apache.org/xml-soap"
+                  xmlns:impl="http://zimbabwe.customization.ws.bss.zsmart.ztesoft.com"
+                  xmlns:intf="http://zimbabwe.customization.ws.bss.zsmart.ztesoft.com"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  targetNamespace="http://zimbabwe.customization.ws.bss.zsmart.ztesoft.com">
+    <wsdl:types>
+        <schema elementFormDefault="qualified" targetNamespace="http://zimbabwe.customization.ws.bss.zsmart.ztesoft.com"
+                xmlns="http://www.w3.org/2001/XMLSchema">
+            <element name="AddUserAcctByIndiPricePlan">
+                <complexType>
+                    <sequence>
+                        <element name="AddUserAcctByIndiPricePlanReqDto" type="impl:AddUserAcctByIndiPricePlanReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="AddUserAcctByIndiPricePlanReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                    <element name="PricePlanID" nillable="true" type="xsd:string"/>
+                    <element name="EffDate" nillable="true" type="xsd:date"/>
+                    <element name="ExpDate" nillable="true" type="xsd:date"/>
+                </sequence>
+            </complexType>
+            <element name="AddUserAcctByIndiPricePlanResponse">
+                <complexType/>
+            </element>
+            <element name="AddUserAcctByIndiPricePlanSubs">
+                <complexType>
+                    <sequence>
+                        <element name="AddUserAcctByIndiPricePlanSubsReqDto"
+                                 type="impl:AddUserAcctByIndiPricePlanSubsReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="AddUserAcctByIndiPricePlanSubsReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                    <element name="PricePlanID" nillable="true" type="xsd:string"/>
+                    <element name="BundleType" nillable="true" type="xsd:string"/>
+                    <element name="EffDate" nillable="true" type="xsd:date"/>
+                    <element name="ExpDate" nillable="true" type="xsd:date"/>
+                </sequence>
+            </complexType>
+            <element name="AddUserAcctByIndiPricePlanSubsResponse">
+                <complexType/>
+            </element>
+            <element name="QueryBalanceAndUsageAmount">
+                <complexType>
+                    <sequence>
+                        <element name="QueryBalanceAndUsageAmountReqDto" type="impl:QueryBalanceAndUsageAmountReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="QueryBalanceAndUsageAmountReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="QueryBalanceAndUsageAmountResponse">
+                <complexType>
+                    <sequence>
+                        <element name="QueryBalanceAndUsageAmountReturn" type="impl:QueryBalanceAndUsageAmountRetDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="QueryBalanceAndUsageAmountRetDto">
+                <sequence>
+                    <element name="Balance" nillable="true" type="xsd:string"/>
+                    <element name="UsageAmount" nillable="true" type="xsd:string"/>
+                    <element name="PostBillAmount" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="QuerySubsUsage">
+                <complexType>
+                    <sequence>
+                        <element name="QuerySubsUsageReqDto" type="impl:QuerySubsUsageReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="QuerySubsUsageReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="QuerySubsUsageResponse">
+                <complexType>
+                    <sequence>
+                        <element name="QuerySubsUsageReturn" type="impl:QuerySubsUsageRetDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="QuerySubsUsageRetDto">
+                <sequence>
+                    <element name="UsageAmount" nillable="true" type="xsd:string"/>
+                    <element name="PostBillAmount" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="QuerySubsUsagePricePlan">
+                <complexType>
+                    <sequence>
+                        <element name="QuerySubsUsagePricePlanReqDto" type="impl:QuerySubsUsagePricePlanReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="QuerySubsUsagePricePlanReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                    <element name="PricePlanID" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="QuerySubsUsagePricePlanResponse">
+                <complexType>
+                    <sequence>
+                        <element name="QuerySubsUsagePricePlanReturn" type="impl:QuerySubsUsagePricePlanRetDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="QuerySubsUsagePricePlanRetDto">
+                <sequence>
+                    <element name="UsageAmount" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="QueryAcmBal">
+                <complexType>
+                    <sequence>
+                        <element name="QueryAcmBalReqDto" type="impl:QueryAcmBalReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="QueryAcmBalReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                    <element name="PricePlanID" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="QueryAcmBalResponse">
+                <complexType>
+                    <sequence>
+                        <element name="QueryAcmBalReturn" type="impl:QueryAcmBalRetDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="QueryAcmBalRetDto">
+                <sequence>
+                    <element name="Balance" nillable="true" type="xsd:string"/>
+                    <element name="EffDate" nillable="true" type="xsd:string"/>
+                    <element name="ExpDate" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="QueryPUKCode">
+                <complexType>
+                    <sequence>
+                        <element name="QueryPUKCodeReqDto" type="impl:QueryPUKCodeReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="QueryPUKCodeReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="QueryPUKCodeResponse">
+                <complexType>
+                    <sequence>
+                        <element name="QueryPUKCodeReturn" type="impl:QueryPUKCodeRetDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="QueryPUKCodeRetDto">
+                <sequence>
+                    <element name="PUKCode" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="QueryCustomerPassword">
+                <complexType>
+                    <sequence>
+                        <element name="QueryCustomerPasswordReqDto" type="impl:QueryCustomerPasswordReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="QueryCustomerPasswordReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="QueryCustomerPasswordResponse">
+                <complexType>
+                    <sequence>
+                        <element name="QueryCustomerPasswordReturn" type="impl:QueryCustomerPasswordRetDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="QueryCustomerPasswordRetDto">
+                <sequence>
+                    <element name="Password" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="AddVAS">
+                <complexType>
+                    <sequence>
+                        <element name="AddVASReqDto" type="impl:AddVASReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="AddVASReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                    <element name="UserPwd" nillable="true" type="xsd:string"/>
+                    <element name="ProductCode" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="AddVASResponse">
+                <complexType/>
+            </element>
+            <element name="RemoveVAS">
+                <complexType>
+                    <sequence>
+                        <element name="RemoveVASReqDto" type="impl:RemoveVASReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="RemoveVASReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                    <element name="UserPwd" nillable="true" type="xsd:string"/>
+                    <element name="ProductCode" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="RemoveVASResponse">
+                <complexType/>
+            </element>
+            <element name="ChangePricePlan">
+                <complexType>
+                    <sequence>
+                        <element name="ChangePricePlanReqDto" type="impl:ChangePricePlanReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="ChangePricePlanReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                    <element name="UserPwd" nillable="true" type="xsd:string"/>
+                    <element name="PricePlanCode" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="ChangePricePlanResponse">
+                <complexType/>
+            </element>
+            <element name="NewConnection">
+                <complexType>
+                    <sequence>
+                        <element name="NewConnectionReqDto" type="impl:NewConnectionReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="NewConnectionReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                    <element name="BrandIndex" nillable="true" type="xsd:string"/>
+                    <element name="ServiceClass" nillable="true" type="xsd:string"/>
+                    <element name="AcntStopDate" nillable="true" type="xsd:date"/>
+                    <element name="CertType" nillable="true" type="xsd:string"/>
+                    <element name="CertNo" nillable="true" type="xsd:string"/>
+                    <element name="CustomerName" nillable="true" type="xsd:string"/>
+                    <element name="CustomerType" nillable="true" type="xsd:string"/>
+                    <element name="CustomerProvince" nillable="true" type="xsd:string"/>
+                    <element name="Address" nillable="true" type="xsd:string"/>
+                    <element name="DefLang" nillable="true" type="xsd:string"/>
+                    <element name="AccountCode" nillable="true" type="xsd:string"/>
+                    <element name="IMSI" nillable="true" type="xsd:string"/>
+                    <element name="ICCID" nillable="true" type="xsd:string"/>
+                    <element name="UserPwd" nillable="true" type="xsd:string"/>
+                    <element name="BillingCycleType" nillable="true" type="xsd:long"/>
+                </sequence>
+            </complexType>
+            <element name="NewConnectionResponse">
+                <complexType/>
+            </element>
+            <element name="Termination">
+                <complexType>
+                    <sequence>
+                        <element name="TerminationReqDto" type="impl:TerminationReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="TerminationReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                    <element name="UserPwd" nillable="true" type="xsd:string"/>
+                    <element name="LogFileName" nillable="true" type="xsd:string"/>
+                    <element name="DeleteVoiceMail" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="TerminationResponse">
+                <complexType/>
+            </element>
+            <element name="SuspensionUnderReq">
+                <complexType>
+                    <sequence>
+                        <element name="SuspensionUnderReqReqDto" type="impl:SuspensionUnderReqReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="SuspensionUnderReqReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                    <element name="UserPwd" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="SuspensionUnderReqResponse">
+                <complexType/>
+            </element>
+            <element name="ReactivationUnderReq">
+                <complexType>
+                    <sequence>
+                        <element name="ReactivationUnderReqReqDto" type="impl:ReactivationUnderReqReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="ReactivationUnderReqReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                    <element name="UserPwd" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="ReactivationUnderReqResponse">
+                <complexType/>
+            </element>
+            <element name="ChangeUserNumber">
+                <complexType>
+                    <sequence>
+                        <element name="ChangeUserNumberReqDto" type="impl:ChangeUserNumberReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="ChangeUserNumberReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                    <element name="UserPwd" nillable="true" type="xsd:string"/>
+                    <element name="NewMSISDN" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="ChangeUserNumberResponse">
+                <complexType/>
+            </element>
+            <element name="ChangeUserBrand">
+                <complexType>
+                    <sequence>
+                        <element name="ChangeUserBrandReqDto" type="impl:ChangeUserBrandReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="ChangeUserBrandReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                    <element name="UserPwd" nillable="true" type="xsd:string"/>
+                    <element name="BrandIndex" nillable="true" type="xsd:string"/>
+                    <element name="ServiceClass" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="ChangeUserBrandResponse">
+                <complexType/>
+            </element>
+            <element name="ReleaseRCBlacklist">
+                <complexType>
+                    <sequence>
+                        <element name="ReleaseRCBlacklistReqDto" type="impl:ReleaseRCBlacklistReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="ReleaseRCBlacklistReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                    <element name="UserPwd" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="ReleaseRCBlacklistResponse">
+                <complexType/>
+            </element>
+            <element name="QueryUserProfile">
+                <complexType>
+                    <sequence>
+                        <element name="QueryUserProfileReqDto" type="impl:QueryUserProfileReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="QueryUserProfileReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                    <element name="IMSI" nillable="true" type="xsd:string"/>
+                    <element name="UserPwd" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="QueryUserProfileResponse">
+                <complexType>
+                    <sequence>
+                        <element name="QueryUserProfileReturn" type="impl:QueryUserProfileRetDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="QueryUserProfileRetDto">
+                <sequence>
+                    <element name="UserProfileDto" nillable="true" type="impl:UserProfileDto"/>
+                </sequence>
+            </complexType>
+            <complexType name="UserProfileDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                    <element name="AcntStopDate" nillable="true" type="xsd:date"/>
+                    <element name="CompletedDate" nillable="true" type="xsd:date"/>
+                    <element name="CertType" nillable="true" type="xsd:long"/>
+                    <element name="CertNo" nillable="true" type="xsd:string"/>
+                    <element name="CustomerName" nillable="true" type="xsd:string"/>
+                    <element name="CustomerType" nillable="true" type="xsd:string"/>
+                    <element name="Address" nillable="true" type="xsd:string"/>
+                    <element name="DefLang" nillable="true" type="xsd:string"/>
+                    <element name="BrandIndex" nillable="true" type="xsd:string"/>
+                    <element name="BrandName" nillable="true" type="xsd:string"/>
+                    <element name="ServiceClass" nillable="true" type="xsd:string"/>
+                    <element name="PostpaidFlag" nillable="true" type="xsd:string"/>
+                    <element name="IMSI" nillable="true" type="xsd:string"/>
+                    <element name="ICCID" nillable="true" type="xsd:string"/>
+                    <element name="SupServiceDtoList" nillable="true" type="impl:ArrayOfSupServiceDto"/>
+                    <element name="PricePlanDtoList" nillable="true" type="impl:ArrayOfPricePlanDto"/>
+                    <element name="FellowISDNDtoList" nillable="true" type="impl:ArrayOfFellowISDNDto"/>
+                    <element name="State" nillable="true" type="xsd:string"/>
+                    <element name="StateSet" nillable="true" type="xsd:string"/>
+                    <element name="CreditLimit" nillable="true" type="xsd:string"/>
+                    <element name="BillingCycleTypeIndex" nillable="true" type="xsd:long"/>
+                    <element name="Deposit" nillable="true" type="xsd:long"/>
+                    <element name="CustAttrDtoList" nillable="true" type="impl:ArrayOfCustAttrDto"/>
+                    <element name="SubsAttrDtoList" nillable="true" type="impl:ArrayOfSubsAttrDto"/>
+                    <element name="BalID" nillable="true" type="xsd:string"/>
+                    <element name="ActiveStopDate" nillable="true" type="xsd:date"/>
+                    <element name="SuspendStopDate" nillable="true" type="xsd:date"/>
+                    <element name="DisableStopDate" nillable="true" type="xsd:date"/>
+                    <element name="ServiceStopDate" nillable="true" type="xsd:date"/>
+                    <element name="RefillErrorTimes" nillable="true" type="xsd:long"/>
+                </sequence>
+            </complexType>
+            <complexType name="ArrayOfSupServiceDto">
+                <sequence>
+                    <element maxOccurs="unbounded" minOccurs="0" name="SupServiceDto" type="impl:SupServiceDto"/>
+                </sequence>
+            </complexType>
+            <complexType name="SupServiceDto">
+                <sequence>
+                    <element name="ServiceCode" nillable="true" type="xsd:string"/>
+                    <element name="ServiceName" nillable="true" type="xsd:string"/>
+                    <element name="CompletedDate" nillable="true" type="xsd:date"/>
+                </sequence>
+            </complexType>
+            <complexType name="ArrayOfPricePlanDto">
+                <sequence>
+                    <element maxOccurs="unbounded" minOccurs="0" name="PricePlanDto" type="impl:PricePlanDto"/>
+                </sequence>
+            </complexType>
+            <complexType name="PricePlanDto">
+                <sequence>
+                    <element name="PricePlanIndex" nillable="true" type="xsd:string"/>
+                    <element name="PricePlanName" nillable="true" type="xsd:string"/>
+                    <element name="CreatedDate" nillable="true" type="xsd:date"/>
+                    <element name="EffDate" nillable="true" type="xsd:date"/>
+                    <element name="ExpDate" nillable="true" type="xsd:date"/>
+                </sequence>
+            </complexType>
+            <complexType name="ArrayOfFellowISDNDto">
+                <sequence>
+                    <element maxOccurs="unbounded" minOccurs="0" name="FellowISDNDto" type="impl:FellowISDNDto"/>
+                </sequence>
+            </complexType>
+            <complexType name="FellowISDNDto">
+                <sequence>
+                    <element name="FellowISDN" nillable="true" type="xsd:string"/>
+                    <element name="FellowType" nillable="true" type="xsd:string"/>
+                    <element name="FellowTypeName" nillable="true" type="xsd:string"/>
+                    <element name="CreatedDate" nillable="true" type="xsd:date"/>
+                </sequence>
+            </complexType>
+            <complexType name="ArrayOfCustAttrDto">
+                <sequence>
+                    <element maxOccurs="unbounded" minOccurs="0" name="CustAttrDto" type="impl:CustAttrDto"/>
+                </sequence>
+            </complexType>
+            <complexType name="CustAttrDto">
+                <sequence>
+                    <element name="AttrCode" nillable="true" type="xsd:string"/>
+                    <element name="AttrValue" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <complexType name="ArrayOfSubsAttrDto">
+                <sequence>
+                    <element maxOccurs="unbounded" minOccurs="0" name="SubsAttrDto" type="impl:SubsAttrDto"/>
+                </sequence>
+            </complexType>
+            <complexType name="SubsAttrDto">
+                <sequence>
+                    <element name="AttrCode" nillable="true" type="xsd:string"/>
+                    <element name="AttrValue" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="ModUserIndiPricePlan">
+                <complexType>
+                    <sequence>
+                        <element name="ModUserIndiPricePlanReqDto" type="impl:ModUserIndiPricePlanReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="ModUserIndiPricePlanReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                    <element name="UserPwd" nillable="true" type="xsd:string"/>
+                    <element name="PricePlanChgDtoList" nillable="true" type="impl:ArrayOfPricePlanChgDto"/>
+                </sequence>
+            </complexType>
+            <element name="ModUserIndiPricePlanResponse">
+                <complexType/>
+            </element>
+            <complexType name="ArrayOfPricePlanChgDto">
+                <sequence>
+                    <element maxOccurs="unbounded" minOccurs="0" name="PricePlanChgDto" type="impl:PricePlanChgDto"/>
+                </sequence>
+            </complexType>
+            <complexType name="PricePlanChgDto">
+                <sequence>
+                    <element name="PricePlanIndex" nillable="true" type="xsd:string"/>
+                    <element name="Action" nillable="true" type="xsd:long"/>
+                    <element name="EffType" nillable="true" type="xsd:long"/>
+                    <element name="EffDate" nillable="true" type="xsd:date"/>
+                    <element name="ExpDate" nillable="true" type="xsd:date"/>
+                </sequence>
+            </complexType>
+            <element name="QueryIndividualPricePlan">
+                <complexType>
+                    <sequence>
+                        <element name="QueryIndividualPricePlanReqDto" type="impl:QueryIndividualPricePlanReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="QueryIndividualPricePlanReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="QueryIndividualPricePlanResponse">
+                <complexType>
+                    <sequence>
+                        <element name="QueryIndividualPricePlanReturn" type="impl:QueryIndividualPricePlanRetDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="QueryIndividualPricePlanRetDto">
+                <sequence>
+                    <element name="PricePlanDtoList" nillable="true"
+                             type="impl:ArrayOfPricePlanDtoQueryIndividualPricePlan"/>
+                </sequence>
+            </complexType>
+            <complexType name="ArrayOfPricePlanDtoQueryIndividualPricePlan">
+                <sequence>
+                    <element maxOccurs="unbounded" minOccurs="0" name="PricePlanDto"
+                             type="impl:PricePlanDtoQueryIndividualPricePlan"/>
+                </sequence>
+            </complexType>
+            <complexType name="PricePlanDtoQueryIndividualPricePlan">
+                <sequence>
+                    <element name="PricePlanIndex" nillable="true" type="xsd:string"/>
+                    <element name="PricePlanName" nillable="true" type="xsd:string"/>
+                    <element name="CreatedDate" nillable="true" type="xsd:date"/>
+                    <element name="EffDate" nillable="true" type="xsd:date"/>
+                    <element name="ExpDate" nillable="true" type="xsd:date"/>
+                    <element name="Priority" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="QueryAcctBal">
+                <complexType>
+                    <sequence>
+                        <element name="QueryAcctBalReqDto" type="impl:QueryAcctBalReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="QueryAcctBalReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                    <element name="AccountCode" nillable="true" type="xsd:string"/>
+                    <element name="VPNID" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="QueryAcctBalResponse">
+                <complexType>
+                    <sequence>
+                        <element name="QueryAcctBalReturn" type="impl:QueryAcctBalRetDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="QueryAcctBalRetDto">
+                <sequence>
+                    <element name="BalDtoList" nillable="true" type="impl:ArrayOfBalDto"/>
+                </sequence>
+            </complexType>
+            <complexType name="ArrayOfBalDto">
+                <sequence>
+                    <element maxOccurs="unbounded" minOccurs="0" name="BalDto" type="impl:BalDto"/>
+                </sequence>
+            </complexType>
+            <complexType name="BalDto">
+                <sequence>
+                    <element name="BalID" nillable="true" type="xsd:string"/>
+                    <element name="AcctResID" nillable="true" type="xsd:string"/>
+                    <element name="AcctResName" nillable="true" type="xsd:string"/>
+                    <element name="BalType" nillable="true" type="xsd:long"/>
+                    <element name="Balance" nillable="true" type="xsd:string"/>
+                    <element name="ConsumeBal" nillable="true" type="xsd:string"/>
+                    <element name="EffDate" nillable="true" type="xsd:date"/>
+                    <element name="ExpDate" nillable="true" type="xsd:date"/>
+                    <element name="UpdateDate" nillable="true" type="xsd:string"/>
+                    <element name="BalShareDtoList" nillable="true" type="impl:ArrayOfBalShareDto"/>
+                </sequence>
+            </complexType>
+            <complexType name="ArrayOfBalShareDto">
+                <sequence>
+                    <element maxOccurs="unbounded" minOccurs="0" name="BalShareDto" type="impl:BalDto"/>
+                </sequence>
+            </complexType>
+            <complexType name="BalShareDto">
+                <sequence>
+                    <element name="BalShareID" nillable="true" type="xsd:string"/>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                    <element name="CeilLimit" nillable="true" type="xsd:string"/>
+                    <element name="Priority" nillable="true" type="xsd:long"/>
+                    <element name="EffDate" nillable="true" type="xsd:date"/>
+                    <element name="ExpDate" nillable="true" type="xsd:date"/>
+                    <element name="PaymentForce" nillable="true" type="xsd:string"/>
+                    <element name="DailyCeilLimit" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="Recharge">
+                <complexType>
+                    <sequence>
+                        <element name="RechargeReqDto" type="impl:RechargeReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="RechargeReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                    <element name="TransactionSN" nillable="true" type="xsd:string"/>
+                    <element name="AcctResCode" nillable="true" type="xsd:string"/>
+                    <element name="Amount" nillable="true" type="xsd:long"/>
+                    <element name="Days" nillable="true" type="xsd:long"/>
+                    <element name="RptFlag" nillable="true" type="xsd:long"/>
+                    <element name="Type" nillable="true" type="xsd:string"/>
+                    <element name="PPSCardPin" nillable="true" type="xsd:string"/>
+                    <element name="CardType" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="RechargeResponse">
+                <complexType>
+                    <sequence>
+                        <element name="RechargeReturn" type="impl:RechargeRetDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="RechargeRetDto">
+                <sequence>
+                    <element name="TransactionSN" nillable="true" type="xsd:string"/>
+                    <element name="BeforeOper" nillable="true" type="xsd:string"/>
+                    <element name="AfterOper" nillable="true" type="xsd:string"/>
+                    <element name="ExpireDate" nillable="true" type="xsd:date"/>
+                    <element name="BonusList" nillable="true" type="impl:ArrayOfBonus"/>
+                </sequence>
+            </complexType>
+            <complexType name="ArrayOfBonus">
+                <sequence>
+                    <element maxOccurs="unbounded" minOccurs="0" name="Bonus" type="impl:Bonus"/>
+                </sequence>
+            </complexType>
+            <complexType name="Bonus">
+                <sequence>
+                    <element name="AcctResCode" nillable="true" type="xsd:string"/>
+                    <element name="AcctResName" nillable="true" type="xsd:string"/>
+                    <element name="BonusValue" nillable="true" type="xsd:string"/>
+                    <element name="EffDate" nillable="true" type="xsd:date"/>
+                    <element name="ExpDate" nillable="true" type="xsd:date"/>
+                    <element name="Days" nillable="true" type="xsd:long"/>
+                </sequence>
+            </complexType>
+            <element name="BalTransfer">
+                <complexType>
+                    <sequence>
+                        <element name="BalTransferReqDto" type="impl:BalTransferReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="BalTransferReqDto">
+                <sequence>
+                    <element name="SAccnt" nillable="true" type="xsd:string"/>
+                    <element name="AcctResCode" nillable="true" type="xsd:string"/>
+                    <element name="Amount" nillable="true" type="xsd:string"/>
+                    <element name="DAccnt" nillable="true" type="xsd:string"/>
+                    <element name="Comments" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="BalTransferResponse">
+                <complexType>
+                    <sequence>
+                        <element name="BalTransferReturn" type="impl:BalTransferRetDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="BalTransferRetDto">
+                <sequence>
+                    <element name="Amount" nillable="true" type="xsd:string"/>
+                    <element name="BeforeBalance" nillable="true" type="xsd:string"/>
+                    <element name="Balance" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="SubscriberRegister">
+                <complexType>
+                    <sequence>
+                        <element name="SubscriberRegisterReqDto" type="impl:SubscriberRegisterReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="SubscriberRegisterReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="SubscriberRegisterResponse">
+                <complexType/>
+            </element>
+            <element name="PrePaidSubscriberRegister">
+                <complexType>
+                    <sequence>
+                        <element name="PrePaidSubscriberRegisterReqDto" type="impl:PrePaidSubscriberRegisterReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="PrePaidSubscriberRegisterReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                    <element name="DOCType" nillable="true" type="xsd:string"/>
+                    <element name="DOCNumber" nillable="true" type="xsd:string"/>
+                    <element name="CustName" nillable="true" type="xsd:string"/>
+                    <element name="Address" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="PrePaidSubscriberRegisterResponse">
+                <complexType/>
+            </element>
+            <element name="CellPhoneNumberIdentify">
+                <complexType>
+                    <sequence>
+                        <element name="CellPhoneNumberIdentifyReqDto" type="impl:CellPhoneNumberIdentifyReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="CellPhoneNumberIdentifyReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="CellPhoneNumberIdentifyResponse">
+                <complexType>
+                    <sequence>
+                        <element name="CellPhoneNumberIdentifyReturn" type="impl:CellPhoneNumberIdentifyRetDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="CellPhoneNumberIdentifyRetDto">
+                <sequence>
+                    <element name="UserFlag" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="ModProdState">
+                <complexType>
+                    <sequence>
+                        <element name="ModProdStateReqDto" type="impl:ModProdStateReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="ModProdStateReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                    <element name="SubsEvent" nillable="true" type="xsd:string"/>
+                    <element name="OldState" nillable="true" type="xsd:string"/>
+                    <element name="NewState" nillable="true" type="xsd:string"/>
+                    <element name="OldBlockReason" nillable="true" type="xsd:string"/>
+                    <element name="NewBlockReason" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="ModProdStateResponse">
+                <complexType/>
+            </element>
+            <element name="ChangeFreeNumberForHybrid">
+                <complexType>
+                    <sequence>
+                        <element name="ChangeFreeNumberForHybridReqDto" type="impl:ChangeFreeNumberForHybridReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="ChangeFreeNumberForHybridReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                    <element name="UserPwd" nillable="true" type="xsd:string"/>
+                    <element name="Action" nillable="true" type="xsd:string"/>
+                    <element name="OldFreeNumber" nillable="true" type="xsd:string"/>
+                    <element name="NewFreeNumber" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="ChangeFreeNumberForHybridResponse">
+                <complexType/>
+            </element>
+            <element name="AddMemberIntoCUG">
+                <complexType>
+                    <sequence>
+                        <element name="AddMemberIntoCUGReqDto" type="impl:CUGMemberReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="CUGMemberReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                    <element name="UserPwd" nillable="true" type="xsd:string"/>
+                    <element name="CUGCode" nillable="true" type="xsd:long"/>
+                </sequence>
+            </complexType>
+            <element name="AddMemberIntoCUGResponse">
+                <complexType/>
+            </element>
+            <element name="RemoveMemberFromCUG">
+                <complexType>
+                    <sequence>
+                        <element name="RemoveMemberFromCUGReqDto" type="impl:CUGMemberReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="RemoveMemberFromCUGResponse">
+                <complexType/>
+            </element>
+            <element name="PrepaidToHybrid">
+                <complexType>
+                    <sequence>
+                        <element name="PrepaidToHybridReqDto" type="impl:HybridReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="HybridReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                    <element name="UserPwd" nillable="true" type="xsd:string"/>
+                    <element name="BrandCode" nillable="true" type="xsd:string"/>
+                    <element name="BundleCode" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="PrepaidToHybridResponse">
+                <complexType/>
+            </element>
+            <element name="PostpaidToHybrid">
+                <complexType>
+                    <sequence>
+                        <element name="PostpaidToHybridReqDto" type="impl:HybridReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="PostpaidToHybridResponse">
+                <complexType/>
+            </element>
+            <element name="PaymentReverse">
+                <complexType>
+                    <sequence>
+                        <element name="PaymentReverseReqDto" type="impl:PaymentReverseReqDto"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <complexType name="PaymentReverseReqDto">
+                <sequence>
+                    <element name="MSISDN" nillable="true" type="xsd:string"/>
+                    <element name="TransactionSN" nillable="true" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="PaymentReverseResponse">
+                <complexType/>
+            </element>
+            <element name="AuthHeader">
+                <complexType>
+                    <sequence>
+                        <element name="Username" nillable="true" type="xsd:string"/>
+                        <element name="Password" nillable="true" type="xsd:string"/>
+                        <element name="REQUEST_ID" nillable="true" type="xsd:string"/>
+                    </sequence>
+                </complexType>
+            </element>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="IntfAuthHeader">
+        <wsdl:part element="impl:AuthHeader" name="AuthHeader"/>
+    </wsdl:message>
+    <wsdl:message name="QueryBalanceAndUsageAmountResponse">
+        <wsdl:part element="impl:QueryBalanceAndUsageAmountResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="QueryBalanceAndUsageAmountRequest">
+        <wsdl:part element="impl:QueryBalanceAndUsageAmount" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="AddUserAcctByIndiPricePlanSubsResponse">
+        <wsdl:part element="impl:AddUserAcctByIndiPricePlanSubsResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="AddUserAcctByIndiPricePlanSubsRequest">
+        <wsdl:part element="impl:AddUserAcctByIndiPricePlanSubs" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="QuerySubsUsageResponse">
+        <wsdl:part element="impl:QuerySubsUsageResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="QuerySubsUsageRequest">
+        <wsdl:part element="impl:QuerySubsUsage" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="QuerySubsUsagePricePlanResponse">
+        <wsdl:part element="impl:QuerySubsUsagePricePlanResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="QuerySubsUsagePricePlanRequest">
+        <wsdl:part element="impl:QuerySubsUsagePricePlan" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="AddUserAcctByIndiPricePlanRequest">
+        <wsdl:part element="impl:AddUserAcctByIndiPricePlan" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="AddUserAcctByIndiPricePlanResponse">
+        <wsdl:part element="impl:AddUserAcctByIndiPricePlanResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="QueryPUKCodeRequest">
+        <wsdl:part element="impl:QueryPUKCode" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="QueryPUKCodeResponse">
+        <wsdl:part element="impl:QueryPUKCodeResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="QueryCustomerPasswordRequest">
+        <wsdl:part element="impl:QueryCustomerPassword" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="QueryCustomerPasswordResponse">
+        <wsdl:part element="impl:QueryCustomerPasswordResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="AddVASRequest">
+        <wsdl:part element="impl:AddVAS" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="AddVASResponse">
+        <wsdl:part element="impl:AddVASResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="RemoveVASRequest">
+        <wsdl:part element="impl:RemoveVAS" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="RemoveVASResponse">
+        <wsdl:part element="impl:RemoveVASResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="ChangePricePlanRequest">
+        <wsdl:part element="impl:ChangePricePlan" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="ChangePricePlanResponse">
+        <wsdl:part element="impl:ChangePricePlanResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="NewConnectionRequest">
+        <wsdl:part element="impl:NewConnection" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="NewConnectionResponse">
+        <wsdl:part element="impl:NewConnectionResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="TerminationRequest">
+        <wsdl:part element="impl:Termination" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="TerminationResponse">
+        <wsdl:part element="impl:TerminationResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="SuspensionUnderReqRequest">
+        <wsdl:part element="impl:SuspensionUnderReq" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="SuspensionUnderReqResponse">
+        <wsdl:part element="impl:SuspensionUnderReqResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="ReactivationUnderReqRequest">
+        <wsdl:part element="impl:ReactivationUnderReq" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="ReactivationUnderReqResponse">
+        <wsdl:part element="impl:ReactivationUnderReqResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="ChangeUserNumberRequest">
+        <wsdl:part element="impl:ChangeUserNumber" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="ChangeUserNumberResponse">
+        <wsdl:part element="impl:ChangeUserNumberResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="ChangeUserBrandRequest">
+        <wsdl:part element="impl:ChangeUserBrand" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="ChangeUserBrandResponse">
+        <wsdl:part element="impl:ChangeUserBrandResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="ReleaseRCBlacklistRequest">
+        <wsdl:part element="impl:ReleaseRCBlacklist" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="ReleaseRCBlacklistResponse">
+        <wsdl:part element="impl:ReleaseRCBlacklistResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="QueryUserProfileRequest">
+        <wsdl:part element="impl:QueryUserProfile" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="QueryUserProfileResponse">
+        <wsdl:part element="impl:QueryUserProfileResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="ModUserIndiPricePlanRequest">
+        <wsdl:part element="impl:ModUserIndiPricePlan" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="ModUserIndiPricePlanResponse">
+        <wsdl:part element="impl:ModUserIndiPricePlanResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="QueryIndividualPricePlanRequest">
+        <wsdl:part element="impl:QueryIndividualPricePlan" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="QueryIndividualPricePlanResponse">
+        <wsdl:part element="impl:QueryIndividualPricePlanResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="QueryAcctBalRequest">
+        <wsdl:part element="impl:QueryAcctBal" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="QueryAcctBalResponse">
+        <wsdl:part element="impl:QueryAcctBalResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="QueryAcmBalRequest">
+        <wsdl:part element="impl:QueryAcmBal" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="QueryAcmBalResponse">
+        <wsdl:part element="impl:QueryAcmBalResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="RechargeRequest">
+        <wsdl:part element="impl:Recharge" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="RechargeResponse">
+        <wsdl:part element="impl:RechargeResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="BalTransferRequest">
+        <wsdl:part element="impl:BalTransfer" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="BalTransferResponse">
+        <wsdl:part element="impl:BalTransferResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="SubscriberRegisterRequest">
+        <wsdl:part element="impl:SubscriberRegister" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="SubscriberRegisterResponse">
+        <wsdl:part element="impl:SubscriberRegisterResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="PrePaidSubscriberRegisterRequest">
+        <wsdl:part element="impl:PrePaidSubscriberRegister" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="PrePaidSubscriberRegisterResponse">
+        <wsdl:part element="impl:PrePaidSubscriberRegisterResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="CellPhoneNumberIdentifyRequest">
+        <wsdl:part element="impl:CellPhoneNumberIdentify" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="CellPhoneNumberIdentifyResponse">
+        <wsdl:part element="impl:CellPhoneNumberIdentifyResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="ModProdStateRequest">
+        <wsdl:part element="impl:ModProdState" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="ModProdStateResponse">
+        <wsdl:part element="impl:ModProdStateResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="ChangeFreeNumberForHybridRequest">
+        <wsdl:part element="impl:ChangeFreeNumberForHybrid" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="ChangeFreeNumberForHybridResponse">
+        <wsdl:part element="impl:ChangeFreeNumberForHybridResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="AddMemberIntoCUGRequest">
+        <wsdl:part element="impl:AddMemberIntoCUG" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="AddMemberIntoCUGResponse">
+        <wsdl:part element="impl:AddMemberIntoCUGResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="RemoveMemberFromCUGRequest">
+        <wsdl:part element="impl:RemoveMemberFromCUG" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="RemoveMemberFromCUGResponse">
+        <wsdl:part element="impl:RemoveMemberFromCUGResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="PrepaidToHybridRequest">
+        <wsdl:part element="impl:PrepaidToHybrid" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="PrepaidToHybridResponse">
+        <wsdl:part element="impl:PrepaidToHybridResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="PostpaidToHybridRequest">
+        <wsdl:part element="impl:PostpaidToHybrid" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="PostpaidToHybridResponse">
+        <wsdl:part element="impl:PostpaidToHybridResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="PaymentReverseRequest">
+        <wsdl:part element="impl:PaymentReverse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="PaymentReverseResponse">
+        <wsdl:part element="impl:PaymentReverseResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:portType name="WebServices">
+        <wsdl:operation name="QueryBalanceAndUsageAmount">
+            <wsdl:input message="impl:QueryBalanceAndUsageAmountRequest" name="QueryBalanceAndUsageAmountRequest"/>
+            <wsdl:output message="impl:QueryBalanceAndUsageAmountResponse" name="QueryBalanceAndUsageAmountResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="AddUserAcctByIndiPricePlanSubs">
+            <wsdl:input message="impl:AddUserAcctByIndiPricePlanSubsRequest"
+                        name="AddUserAcctByIndiPricePlanSubsRequest"/>
+            <wsdl:output message="impl:AddUserAcctByIndiPricePlanSubsResponse"
+                         name="AddUserAcctByIndiPricePlanSubsResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="AddUserAcctByIndiPricePlan">
+            <wsdl:input message="impl:AddUserAcctByIndiPricePlanRequest" name="AddUserAcctByIndiPricePlanRequest"/>
+            <wsdl:output message="impl:AddUserAcctByIndiPricePlanResponse" name="AddUserAcctByIndiPricePlanResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="QuerySubsUsage">
+            <wsdl:input message="impl:QuerySubsUsageRequest" name="QuerySubsUsageRequest"/>
+            <wsdl:output message="impl:QuerySubsUsageResponse" name="QuerySubsUsageResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="QuerySubsUsagePricePlan">
+            <wsdl:input message="impl:QuerySubsUsagePricePlanRequest" name="QuerySubsUsagePricePlanRequest"/>
+            <wsdl:output message="impl:QuerySubsUsagePricePlanResponse" name="QuerySubsUsagePricePlanResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="QueryPUKCode">
+            <wsdl:input message="impl:QueryPUKCodeRequest" name="QueryPUKCodeRequest"/>
+            <wsdl:output message="impl:QueryPUKCodeResponse" name="QueryPUKCodeResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="QueryCustomerPassword">
+            <wsdl:input message="impl:QueryCustomerPasswordRequest" name="QueryCustomerPasswordRequest"/>
+            <wsdl:output message="impl:QueryCustomerPasswordResponse" name="QueryCustomerPasswordResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="AddVAS">
+            <wsdl:input message="impl:AddVASRequest" name="AddVASRequest"/>
+            <wsdl:output message="impl:AddVASResponse" name="AddVASResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="RemoveVAS">
+            <wsdl:input message="impl:RemoveVASRequest" name="RemoveVASRequest"/>
+            <wsdl:output message="impl:RemoveVASResponse" name="RemoveVASResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="ChangePricePlan">
+            <wsdl:input message="impl:ChangePricePlanRequest" name="ChangePricePlanRequest"/>
+            <wsdl:output message="impl:ChangePricePlanResponse" name="ChangePricePlanResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="NewConnection">
+            <wsdl:input message="impl:NewConnectionRequest" name="NewConnectionRequest"/>
+            <wsdl:output message="impl:NewConnectionResponse" name="NewConnectionResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="Termination">
+            <wsdl:input message="impl:TerminationRequest" name="TerminationRequest"/>
+            <wsdl:output message="impl:TerminationResponse" name="TerminationResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="SuspensionUnderReq">
+            <wsdl:input message="impl:SuspensionUnderReqRequest" name="SuspensionUnderReqRequest"/>
+            <wsdl:output message="impl:SuspensionUnderReqResponse" name="SuspensionUnderReqResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="ReactivationUnderReq">
+            <wsdl:input message="impl:ReactivationUnderReqRequest" name="ReactivationUnderReqRequest"/>
+            <wsdl:output message="impl:ReactivationUnderReqResponse" name="ReactivationUnderReqResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="ChangeUserNumber">
+            <wsdl:input message="impl:ChangeUserNumberRequest" name="ChangeUserNumberRequest"/>
+            <wsdl:output message="impl:ChangeUserNumberResponse" name="ChangeUserNumberResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="ChangeUserBrand">
+            <wsdl:input message="impl:ChangeUserBrandRequest" name="ChangeUserBrandRequest"/>
+            <wsdl:output message="impl:ChangeUserBrandResponse" name="ChangeUserBrandResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="ReleaseRCBlacklist">
+            <wsdl:input message="impl:ReleaseRCBlacklistRequest" name="ReleaseRCBlacklistRequest"/>
+            <wsdl:output message="impl:ReleaseRCBlacklistResponse" name="ReleaseRCBlacklistResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="QueryUserProfile">
+            <wsdl:input message="impl:QueryUserProfileRequest" name="QueryUserProfileRequest"/>
+            <wsdl:output message="impl:QueryUserProfileResponse" name="QueryUserProfileResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="ModUserIndiPricePlan">
+            <wsdl:input message="impl:ModUserIndiPricePlanRequest" name="ModUserIndiPricePlanRequest"/>
+            <wsdl:output message="impl:ModUserIndiPricePlanResponse" name="ModUserIndiPricePlanResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="QueryIndividualPricePlan">
+            <wsdl:input message="impl:QueryIndividualPricePlanRequest" name="QueryIndividualPricePlanRequest"/>
+            <wsdl:output message="impl:QueryIndividualPricePlanResponse" name="QueryIndividualPricePlanResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="QueryAcctBal">
+            <wsdl:input message="impl:QueryAcctBalRequest" name="QueryAcctBalRequest"/>
+            <wsdl:output message="impl:QueryAcctBalResponse" name="QueryAcctBalResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="QueryAcmBal">
+            <wsdl:input message="impl:QueryAcmBalRequest" name="QueryAcmBalRequest"/>
+            <wsdl:output message="impl:QueryAcmBalResponse" name="QueryAcmBalResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="Recharge">
+            <wsdl:input message="impl:RechargeRequest" name="RechargeRequest"/>
+            <wsdl:output message="impl:RechargeResponse" name="RechargeResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="BalTransfer">
+            <wsdl:input message="impl:BalTransferRequest" name="BalTransferRequest"/>
+            <wsdl:output message="impl:BalTransferResponse" name="BalTransferResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="SubscriberRegister">
+            <wsdl:input message="impl:SubscriberRegisterRequest" name="SubscriberRegisterRequest"/>
+            <wsdl:output message="impl:SubscriberRegisterResponse" name="SubscriberRegisterResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="PrePaidSubscriberRegister">
+            <wsdl:input message="impl:PrePaidSubscriberRegisterRequest" name="PrePaidSubscriberRegisterRequest"/>
+            <wsdl:output message="impl:PrePaidSubscriberRegisterResponse" name="PrePaidSubscriberRegisterResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="CellPhoneNumberIdentify">
+            <wsdl:input message="impl:CellPhoneNumberIdentifyRequest" name="CellPhoneNumberIdentifyRequest"/>
+            <wsdl:output message="impl:CellPhoneNumberIdentifyResponse" name="CellPhoneNumberIdentifyResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="ModProdState">
+            <wsdl:input message="impl:ModProdStateRequest" name="ModProdStateRequest"/>
+            <wsdl:output message="impl:ModProdStateResponse" name="ModProdStateResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="ChangeFreeNumberForHybrid">
+            <wsdl:input message="impl:ChangeFreeNumberForHybridRequest" name="ChangeFreeNumberForHybridRequest"/>
+            <wsdl:output message="impl:ChangeFreeNumberForHybridResponse" name="ChangeFreeNumberForHybridResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="AddMemberIntoCUG">
+            <wsdl:input message="impl:AddMemberIntoCUGRequest" name="AddMemberIntoCUGRequest"/>
+            <wsdl:output message="impl:AddMemberIntoCUGResponse" name="AddMemberIntoCUGResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="RemoveMemberFromCUG">
+            <wsdl:input message="impl:RemoveMemberFromCUGRequest" name="RemoveMemberFromCUGRequest"/>
+            <wsdl:output message="impl:RemoveMemberFromCUGResponse" name="RemoveMemberFromCUGResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="PrepaidToHybrid">
+            <wsdl:input message="impl:PrepaidToHybridRequest" name="PrepaidToHybridRequest"/>
+            <wsdl:output message="impl:PrepaidToHybridResponse" name="PrepaidToHybridResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="PostpaidToHybrid">
+            <wsdl:input message="impl:PostpaidToHybridRequest" name="PostpaidToHybridRequest"/>
+            <wsdl:output message="impl:PostpaidToHybridResponse" name="PostpaidToHybridResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="PaymentReverse">
+            <wsdl:input message="impl:PaymentReverseRequest" name="PaymentReverseRequest"/>
+            <wsdl:output message="impl:PaymentReverseResponse" name="PaymentReverseResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="WebServicesSoapBinding" type="impl:WebServices">
+        <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="QueryBalanceAndUsageAmount">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="AddUserAcctByIndiPricePlanSubs">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="AddUserAcctByIndiPricePlan">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="QuerySubsUsage">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="QuerySubsUsagePricePlan">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="QueryPUKCode">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="QueryCustomerPassword">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="AddVAS">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="RemoveVAS">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ChangePricePlan">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="NewConnection">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Termination">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SuspensionUnderReq">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ReactivationUnderReq">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ChangeUserNumber">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ChangeUserBrand">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ReleaseRCBlacklist">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="QueryUserProfile">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ModUserIndiPricePlan">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="QueryIndividualPricePlan">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="QueryAcctBal">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="QueryAcmBal">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Recharge">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="BalTransfer">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SubscriberRegister">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="PrePaidSubscriberRegister">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CellPhoneNumberIdentify">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ModProdState">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ChangeFreeNumberForHybrid">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="AddMemberIntoCUG">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="RemoveMemberFromCUG">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="PrepaidToHybrid">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="PostpaidToHybrid">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="PaymentReverse">
+            <wsdlsoap:operation/>
+            <wsdl:input>
+                <wsdlsoap:header message="impl:IntfAuthHeader" part="AuthHeader" use="literal"/>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="WebServicesService">
+        <wsdl:port binding="impl:WebServicesSoapBinding" name="WebServices">
+            <wsdlsoap:address location="http://10.10.6.9:8080/ocswebservices/services/zimbabweWebServices"/>
+        </wsdl:port>
+    </wsdl:service>
+    <!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+</wsdl:definitions>
